@@ -1,0 +1,5 @@
+<%= form_for [task, task.offers.build] do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.submit "Express Interest", class: "btn btn-info" %>
+  <%= link_to 'Back', tasks_path, class: "btn btn-default" %>
+<% end %>

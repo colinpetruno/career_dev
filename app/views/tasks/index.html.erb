@@ -1,0 +1,23 @@
+<% @tasks.each do |category| %>
+  <h3><%= category.first %></h3>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Fun Factor</th>
+      <th>Difficulty</th>
+      <th>Size</th>
+      <th>Points</th>
+    </tr>
+
+    <% category.last.each do |task| %>
+      <tr>
+        <td><%= link_to task.title, task_path(task) %></td>
+        <td><%= task.fun_factor %></td>
+        <td><%= task.difficulty %></td>
+        <td><%= task.size %></td>
+        <td><%= task.points %></td>
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>

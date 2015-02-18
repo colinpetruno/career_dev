@@ -1,0 +1,33 @@
+<%= form_for [:admin, @task] do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category, options_for_select(Task::CATEGORIES), {}, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fun_factor %>
+    <%= f.select :fun_factor, options_for_select(Task::DIFFICULTY), {}, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :difficulty %>
+    <%= f.select :difficulty, options_for_select(Task::DIFFICULTY), {}, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :size %>
+    <%= f.select :size, options_for_select(Task::DIFFICULTY), {}, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

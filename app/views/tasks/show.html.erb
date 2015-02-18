@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-5">
+
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <b>Title:</b>
+      <%= @task.title %>
+    </p>
+
+    <p>
+      <b>Description:</b>
+      <%= @task.description %>
+    </p>
+
+    <p>
+      <b>Difficulty:</b>
+      <%= @task.difficulty %>
+    </p>
+
+    <p>
+      <b>Fun factor:</b>
+      <%= @task.fun_factor %>
+    </p>
+
+    <p>
+      <b>Size:</b>
+      <%= @task.size %>
+    </p>
+
+    <p>
+      <b>Category:</b>
+      <%= @task.category %>
+    </p>
+
+
+    <% if @task.has_expressed_interest?(current_user) %>
+      <p class="text-success">You have already expressed interest in this task</p>
+      <%= link_to 'Back', tasks_path, class: "btn btn-default" %>
+    <% else %>
+      <%= form_for [@task, @task.offers.build] do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit "Express Interest", class: "btn btn-info" %>
+        <%= link_to 'Back', tasks_path, class: "btn btn-default" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-7">
+    <% if @task.accepted?(current_user) %>
+      <% if @task.offer_for(current_user).approved? %>
+        <%= render partial: "/tasks/offers/approved" %>
+      <% elsif @task.completed?(current_user) %>
+        <%= render partial: "/tasks/offers/completed" %>
+      <% else %>
+        <%= render partial: "/tasks/offers/accepted" %>
+      <% end %>
+    <% else %>
+      <% if @task.approved?(current_user) %>
+        This is approved task
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
