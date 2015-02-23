@@ -1,0 +1,14 @@
+.two-column-row {
+  @include outer-container;
+  >div {
+    @include span-columns(6);
+
+    @include media($mobile) {
+      @include span-columns(12);
+    }
+
+    &:last-child {
+      @include omega;
+    }
+  }
+}

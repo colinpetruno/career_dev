@@ -9,6 +9,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2' 
 gem 'mysql2'
 gem 'activerecord-session_store'
+gem 'high_voltage'
 
 
 # Gems used only for assets and not required
@@ -16,12 +17,16 @@ gem 'activerecord-session_store'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
-
+  
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier'
 end
+
+gem 'bitters'
+gem 'bourbon'
+gem 'neat'
 
 group :development do 
   gem 'byebug'

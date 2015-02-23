@@ -1,0 +1,15 @@
+#hero-section {
+  background-image: url("/assets/home_page/background-2.jpg");
+  background-size: cover;
+  color: $white;
+  min-height: 450px;
+  .box {
+    padding: 20px;
+    display: inline-block;
+    background-color: adjust-color($green, $alpha: -.35);
+    @include transform(skew(-10deg));
+    div {
+      @include transform(skew(10deg));
+    }
+  }
+}

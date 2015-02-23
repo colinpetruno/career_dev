@@ -1,0 +1,45 @@
+<div id="new-registration-form">
+  <%= form_for @registration do |f| %>
+    <div class="two-column-row">
+      <div>
+        <h1>Get Started</h1>
+
+        <div>
+          <% if @registration.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+                <% @registration.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+
+        <%= f.label :company_name %>
+        <%= f.text_field :company_name %>
+
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.text_field :password %>
+
+        <%= f.label :password_confirmation %>
+        <%= f.text_field :password_confirmation %>
+
+        <%= f.submit %>
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+  <% end %>
+</div>

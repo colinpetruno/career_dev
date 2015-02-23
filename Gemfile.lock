@@ -46,6 +46,13 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    bitters (1.0.0)
+      bourbon (>= 3.2)
+      sass (>= 3.2)
+      thor
+    bourbon (4.2.0)
+      sass (~> 3.4)
+      thor
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -75,6 +82,7 @@ GEM
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     hashie (3.3.2)
+    high_voltage (2.2.1)
     hike (1.2.3)
     i18n (0.7.0)
     jquery-rails (4.0.3)
@@ -95,6 +103,9 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.17)
+    neat (1.7.1)
+      bourbon (>= 4.0)
+      sass (>= 3.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     oauth2 (1.0.0)
@@ -186,11 +197,15 @@ PLATFORMS
 DEPENDENCIES
   activerecord-session_store
   better_errors
+  bitters
+  bourbon
   byebug
   coffee-rails
   devise
+  high_voltage
   jquery-rails
   mysql2
+  neat
   omniauth
   omniauth-google-oauth2
   pry-byebug
