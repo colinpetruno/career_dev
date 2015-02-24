@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
   private
 
   def check_for_current_user
-    redirect_to tasks_path
+    redirect_to tasks_path if current_user.present?
   end
 
   def registration_params

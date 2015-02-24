@@ -6,7 +6,7 @@ class Admin::TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Task.from(current_user)
   end
 
   def create
@@ -40,6 +40,6 @@ class Admin::TasksController < ApplicationController
   def task_params
     params.
       require(:task).
-      permit(:category, :description, :difficulty, :fun_factor, :size, :title)
+      permit(:category, :description, :difficulty, :fun_factor, :size, :title, :company_id, :user_id)
   end
 end

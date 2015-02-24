@@ -3,6 +3,7 @@ class TasksController < AuthenticatedController
   # GET /tasks.json
   def index
     @tasks = Task.
+      for(current_user).
       all.
       group_by { |tasks| tasks.category }
 

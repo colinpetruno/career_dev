@@ -8,6 +8,14 @@ class Task < ActiveRecord::Base
   has_many :offers
   has_many :users, through: :offers
 
+  def self.for(user)
+    where(company_id: user.company_id)
+  end
+
+  def self.from(user)
+    new(user_id: user.id, company_id: user.company_id)
+  end
+
   def has_expressed_interest?(user)
     offers.map(&:user_id).include?(user.id)
   end

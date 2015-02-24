@@ -4,4 +4,7 @@ section {
   &.primary {
     background-color: $green; 
   }
+  >div {
+    @include outer-container;
+  }
 }
