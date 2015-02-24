@@ -1,0 +1,33 @@
+.center {
+  text-align: center;
+}
+
+.pricing-section {
+
+  border: 1px solid darken($dark-gray, 20%);
+  background-color: rgba($dark-gray, .8);
+  text-align: center;
+  color: $white;
+  padding: 20px;
+
+  .price {
+    em { 
+      font-size: 36px;
+      font-style: normal;
+    }
+  }
+
+  .recommended {
+    background-color: $green; 
+    color: $dark-gray;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.featured {
+  background-color: $green;
+  color: $dark-gray;
+  text-align: center;
+  padding: 5px;
+}
