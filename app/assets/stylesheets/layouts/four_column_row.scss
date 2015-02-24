@@ -1,0 +1,14 @@
+.four-column-row {
+  @include outer-container;
+  >div {
+    @include span-columns(3);
+
+    @include media($mobile) {
+      @include span-columns(12);
+    }
+
+    &:last-child {
+      @include omega;
+    }
+  }
+}
