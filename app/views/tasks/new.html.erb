@@ -1,5 +1,9 @@
-<h1>New task</h1>
+<section>
+  <div class="contain">
+    <h1>New task</h1>
 
-<%= render 'form' %>
+    <%= render 'form' %>
 
-<%= link_to 'Back', tasks_path %>
+    <%= link_to 'Back', company_tasks_path(current_user.company) %>
+  </div>
+</div>
