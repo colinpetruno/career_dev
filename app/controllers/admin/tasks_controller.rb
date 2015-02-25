@@ -1,7 +1,10 @@
 class Admin::TasksController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @tasks = Task.
-      all.
+    @tasks = current_user.
+      company.
+      tasks.
       group_by { |tasks| tasks.category }
   end
 
@@ -19,15 +22,12 @@ class Admin::TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to admin_task_path(@task)
     else

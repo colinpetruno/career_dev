@@ -1,7 +1,14 @@
 <section>
   <div>
-    <h1>Tasks</h1>
-    <%= link_to "New Task", new_admin_task_path %>
+
+    <div class="two-column-row">
+      <div>
+        <h1>Tasks</h1>
+      </div>
+      <div class="text-right">
+        <%= link_to "New Task", new_admin_task_path, class: "button" %>
+      </div>
+    </div>
 
     <% @tasks.each do |category| %>
       <h3><%= category.first %></h3>

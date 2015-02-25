@@ -1,12 +1,16 @@
-<% @tasks.each do |category| %>
-  <h3><%= category.first %></h3>
-  <% category.last.each do |task| %>
-    <%= link_to task.title, admin_task_path(task) %> <br>
-  <% end %>
-<% end %>
+<section>
+  <div>
+    <% @tasks.each do |category| %>
+      <h3><%= category.first %></h3>
+      <% category.last.each do |task| %>
+        <%= link_to task.title, admin_task_path(task) %> <br>
+      <% end %>
+    <% end %>
 
-<br><br>
+    <br><br>
 
-<div>
-  <%= link_to "New Task", new_admin_task_path, class: "btn btn-info" %>
-</div>
+    <div>
+      <%= link_to "New Task", new_admin_task_path, class: "btn btn-info" %>
+    </div>
+  </div>
+</section>

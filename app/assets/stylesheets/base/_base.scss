@@ -6,15 +6,22 @@
 @import "variables";
 
 // Neat Settings -- uncomment if using Neat -- must be imported before Neat
-// @import "grid-settings";
+@import "grid-settings";
 
 @import "buttons";
 @import "forms";
 @import "lists";
 @import "tables";
 @import "typography";
+@import "layout";
 
 body {
   margin: 0px;
   padding: 0px;
+  background-color: $dark-gray;
+}
+
+#content-section {
+  background-color: $white;
+  min-height: 500px;
 }

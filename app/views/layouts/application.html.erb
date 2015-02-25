@@ -17,14 +17,17 @@
   <body>
     <%= render partial: "shared/header" %>
 
-    <% if notice.present? %>
-      <div class="alert alert-success"><%= notice %></div>
-    <% end %>
-    <% if alert.present? %>
-      <div class="alert alert-danger"><%= alert %></div>
-    <% end %>
 
-    <%= yield %>
+    <div id="content-section">
+      <% if notice.present? %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% end %>
+      <% if alert.present? %>
+        <div class="alert alert-danger"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
 
     <%= render partial: "shared/footer" %>
 

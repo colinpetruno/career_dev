@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include RoleModel
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -8,6 +9,10 @@ class User < ActiveRecord::Base
   has_many :offers
   has_many :tasks, through: :offers
   belongs_to :company
+
+  # declare the valid roles -- do not change the order if you add more
+  # roles later, always append them at the end!
+  roles :admin, :company_admin, :manager, :user
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -24,18 +29,12 @@ class User < ActiveRecord::Base
     user
   end
 
-
-
   def update_points
     update_column(:points, sum_points)
   end
 
   def create_or_associate_company
     Company.create_or_associate(self)
-  end
-
-  def domain
-    email.split('@').last
   end
 
   private
