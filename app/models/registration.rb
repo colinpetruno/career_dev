@@ -35,6 +35,7 @@ class Registration
       first_name: first_name,
       last_name: last_name
     )
+    self.user.roles = [:company_admin]
     self.user.build_company(name: company_name)
 
     self.user.save

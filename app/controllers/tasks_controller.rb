@@ -3,6 +3,7 @@ class TasksController < AuthenticatedController
   # GET /tasks.json
   def index
     @tasks = Task.
+      for(current_user).
       all.
       group_by { |tasks| tasks.category }
 
@@ -15,7 +16,7 @@ class TasksController < AuthenticatedController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @task = Task.find(params[:id])
+    @task = current_user.company.tasks.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

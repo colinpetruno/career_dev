@@ -1,4 +1,8 @@
 class Company < ActiveRecord::Base
+  has_many :tasks
+
+  validates :name, uniqueness: true
+  validates :domain, uniqueness: true
 
   def self.create_or_associate(user)
     company = Company.where(domain: user.domain)

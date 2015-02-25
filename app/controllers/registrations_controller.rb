@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   respond_to :html
+  before_filter :check_for_current_user
 
   def new
     @registration = Registration.new
@@ -15,6 +16,10 @@ class RegistrationsController < ApplicationController
   end
 
   private
+
+  def check_for_current_user
+    redirect_to tasks_path if current_user.present?
+  end
 
   def registration_params
     params.

@@ -1,28 +1,42 @@
+<<<<<<< HEAD
+
+<section>
+  <div>
+>>>>>>> 59239b6f4caba761f97b3c2f09f28eba7fb45df6
+
+    <div class="two-column-row">
+      <div>
+        <h1>Tasks</h1>
+      </div>
+      <div class="text-right">
+        <%= link_to "New Task", new_admin_task_path, class: "button" %>
+      </div>
+    </div>
 <button data-toggle="All">All</button>
 <% @tasks.each do |category| %>
 <button data-toggle="<%= category.first %>"><%= category.first %></button>
 <% end %>
+    <% @tasks.each do |category| %>
+      <h3 class="<%= category.first %>"><%= category.first %></h3>
+      <table class="table <%= category.first %>">
+        <tr>
+          <th>Name</th>
+          <th>Fun Factor</th>
+          <th>Difficulty</th>
+          <th>Size</th>
+          <th>Points</th>
+        </tr>
 
-<% @tasks.each do |category| %>
-  <h3 class="<%= category.first %>"><%= category.first %></h3>
-  <table class="table <%= category.first %>">
-    <tr>
-      <th>Name</th>
-      <th>Fun Factor</th>
-      <th>Difficulty</th>
-      <th>Size</th>
-      <th>Points</th>
-    </tr>
-
-    <% category.last.each do |task| %>
-      <tr>
-        <td><%= link_to task.title, task_path(task) %></td>
-        <td><%= task.fun_factor %></td>
-        <td><%= task.difficulty %></td>
-        <td><%= task.size %></td>
-        <td><%= task.points %></td>
-      </tr>
+        <% category.last.each do |task| %>
+          <tr>
+            <td><%= link_to task.title, task_path(task) %></td>
+            <td><%= task.fun_factor %></td>
+            <td><%= task.difficulty %></td>
+            <td><%= task.size %></td>
+            <td><%= task.points %></td>
+          </tr>
+        <% end %>
+      </table>
     <% end %>
-  </table>
-
-<% end %>
+  </div>
+</section>
