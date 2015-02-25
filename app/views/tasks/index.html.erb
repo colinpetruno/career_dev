@@ -1,6 +1,11 @@
+<button data-toggle="All">All</button>
 <% @tasks.each do |category| %>
-  <h3><%= category.first %></h3>
-  <table class="table">
+<button data-toggle="<%= category.first %>"><%= category.first %></button>
+<% end %>
+
+<% @tasks.each do |category| %>
+  <h3 class="<%= category.first %>"><%= category.first %></h3>
+  <table class="table <%= category.first %>">
     <tr>
       <th>Name</th>
       <th>Fun Factor</th>
