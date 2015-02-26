@@ -26,7 +26,7 @@
         <div class="alert alert-danger"><%= alert %></div>
       <% end %>
 
-      <%= yield %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
 
     <%= render partial: "shared/footer" %>

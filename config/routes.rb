@@ -5,10 +5,16 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :company do
+  resources :companies, only: [:edit, :update] do
+    resources :users, only: [:index], path: "employees"
+    resources :settings, only: [:index]
     resources :tasks do
       resources :offers, only: [:create, :update]
     end
+  end
+
+  resources :tasks do
+    resources :offers, only: [:create, :update]
   end
 
   resources :registrations, only: [:new, :create]

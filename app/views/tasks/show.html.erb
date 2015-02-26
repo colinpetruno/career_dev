@@ -1,64 +1,85 @@
 <section>
   <div>
-
-    <p id="notice"><%= notice %></p>
-
-    <p>
-      <b>Title:</b>
-      <%= @task.title %>
-    </p>
-
-    <p>
-      <b>Description:</b>
-      <%= @task.description %>
-    </p>
-
-    <p>
-      <b>Difficulty:</b>
-      <%= @task.difficulty %>
-    </p>
-
-    <p>
-      <b>Fun factor:</b>
-      <%= @task.fun_factor %>
-    </p>
-
-    <p>
-      <b>Size:</b>
-      <%= @task.size %>
-    </p>
-
-    <p>
-      <b>Category:</b>
-      <%= @task.category %>
-    </p>
+    <div class="two-column-row">
+      <div>
+        <h3><%= @task.title %></h3>
+      </div>
+      <div class="text-right">
+        <% if can? :manage, @task %>
+          <%= link_to "Edit Task",
+              edit_company_task_path(current_user.company, @task),
+              class: "button"
+          %>
+        <% end %>
+      </div>
+    </div>
+    <div class="two-column-row">
+      <div>
 
 
-    <% if @task.has_expressed_interest?(current_user) %>
-      <p class="text-success">You have already expressed interest in this task</p>
-      <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
-    <% else %>
-      <%= form_for [current_user.company, @task, @task.offers.build] do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.submit "Express Interest", class: "btn btn-info" %>
-        <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="col-md-7">
-    <% if @task.accepted?(current_user) %>
-      <% if @task.offer_for(current_user).approved? %>
-        <%= render partial: "/tasks/offers/approved" %>
-      <% elsif @task.completed?(current_user) %>
-        <%= render partial: "/tasks/offers/completed" %>
-      <% else %>
-        <%= render partial: "/tasks/offers/accepted" %>
-      <% end %>
-    <% else %>
-      <% if @task.approved?(current_user) %>
-        This is approved task
-      <% end %>
-    <% end %>
+        <p id="notice"><%= notice %></p>
+        <p>
+        <b>Title:</b>
+        <%= @task.title %>
+        </p>
+
+        <p>
+        <b>Description:</b>
+        <%= @task.description %>
+        </p>
+
+        <p>
+        <b>Difficulty:</b>
+        <%= @task.difficulty %>
+        </p>
+
+        <p>
+        <b>Fun factor:</b>
+        <%= @task.fun_factor %>
+        </p>
+
+        <p>
+        <b>Size:</b>
+        <%= @task.size %>
+        </p>
+
+        <p>
+        <b>Category:</b>
+        <%= @task.category %>
+        </p>
+
+
+        <% if @task.has_expressed_interest?(current_user) %>
+          <p class="text-success">You have already expressed interest in this task</p>
+          <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
+        <% else %>
+          <%= form_for [current_user.company, @task, @task.offers.build] do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.submit "Express Interest", class: "btn btn-info" %>
+            <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div>
+
+        <% if can? :manage, @task %>
+          <%= render partial: "manage_sidebar" %>
+        <% end %>
+
+        <% if @task.accepted?(current_user) %>
+          <% if @task.offer_for(current_user).approved? %>
+            <%= render partial: "/tasks/offers/approved" %>
+          <% elsif @task.completed?(current_user) %>
+            <%= render partial: "/tasks/offers/completed" %>
+          <% else %>
+            <%= render partial: "/tasks/offers/accepted" %>
+          <% end %>
+        <% elsif @task.approved?(current_user) %>
+          This is approved task
+        <% end %>
+      </div>
+    </div>
   </div>
 </section>
 

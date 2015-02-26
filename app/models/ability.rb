@@ -6,6 +6,8 @@ class Ability
       can :manage, :all
     elsif user.is? :company_admin
       can :manage, Task, company_id: user.company_id
+      can :manage, Company, id: user.company_id
+      can :manage, User, company_id: user.company_id
     end
 
     # Define abilities for the passed in user here. For example:

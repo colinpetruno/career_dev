@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
   validates :name, uniqueness: true
   validates :domain, uniqueness: true
 
-  before_create :set_slug
+  before_save :set_slug
 
   def self.create_or_associate(user)
     company = Company.where(domain: user.domain)

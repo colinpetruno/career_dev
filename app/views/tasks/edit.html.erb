@@ -1,6 +1,10 @@
-<h1>Editing task</h1>
+<section>
+  <div>
+    <h1>Editing task</h1>
 
-<%= render 'form' %>
+    <%= render 'form' %>
 
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
+    <%= link_to 'Show', company_task_path(current_user.company, @task) %> |
+    <%= link_to 'Back', company_tasks_path(current_user.company) %>
+  </div>
+</section>

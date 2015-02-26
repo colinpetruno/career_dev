@@ -1,0 +1,10 @@
+<%= form_for @company do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <p>Set the domain to allow new users to join via their email address</p>
+  <%= f.label :domain %>
+  <%= f.text_field :domain %>
+
+  <%= f.submit %>
+<% end %>

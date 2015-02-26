@@ -1,0 +1,25 @@
+<%= content_for :content do %>
+  <section>
+    <div class="contain">
+      <div class="left-rail">
+        <div>
+          <ul>
+            <li>
+              <%= link_to "Settings", edit_company_path(current_user.company) %>
+            </li>
+            <li>
+              <%= link_to "Employees", company_users_path(current_user.company) %>
+            </li>
+            <li>
+              <%= link_to "Billing", "#" %>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+<%= render template: "layouts/application" %>
