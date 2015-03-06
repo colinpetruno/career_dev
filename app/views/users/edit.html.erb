@@ -1,0 +1,18 @@
+<%= form_for [@user.company, @user] do |f| %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+
+  <%= f.select(
+      :role,
+      User.
+        public_roles.
+        map {|role| [role.to_s.titleize, role]},
+      {},
+      disabled: @user.id.eql?(current_user.id)
+    )
+  %>
+  <%= f.submit %>
+<% end %>

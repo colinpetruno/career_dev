@@ -1,2 +1,3 @@
 :default:
-  :test_setting: "blah"
+  :balanced:
+    :api_key: "ak-test-2IfBSMHWXU55xtQ13j9lvtK8IRjsb804g"

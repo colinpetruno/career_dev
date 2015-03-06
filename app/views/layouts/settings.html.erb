@@ -11,7 +11,10 @@
               <%= link_to "Employees", company_users_path(current_user.company) %>
             </li>
             <li>
-              <%= link_to "Billing", "#" %>
+              <%= link_to "Billing Plan", company_billing_plans_path(current_user.company) %>
+            </li>
+            <li>
+              <%= link_to "Payment Methods", company_funding_instruments_path(current_user.company) %>
             </li>
           </ul>
         </div>

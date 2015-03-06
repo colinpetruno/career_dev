@@ -4,30 +4,36 @@
 
 .pricing-section {
 
-  border: 1px solid darken($dark-gray, 20%);
   background-color: rgba($dark-gray, .8);
   text-align: center;
   color: $white;
-  padding: 20px;
+  margin-top: 34px;
 
-  .price {
-    em { 
-      font-size: 36px;
-      font-style: normal;
+  .pricing-section-details {
+    min-height: 263px;
+    border: 1px solid darken($dark-gray, 20%);
+    padding: 20px;
+
+    .price {
+      em { 
+        font-size: 36px;
+        font-style: normal;
+      }
     }
   }
 
-  .recommended {
-    background-color: $green; 
+  .featured {
+    background-color: $green;
     color: $dark-gray;
-    padding: 5px 10px;
-    margin-bottom: 20px;
+    text-align: center;
+    padding: 5px;
+  } 
+
+  &.recommended {
+    margin-top: 0px;
+    // background-color: $green; 
+    color: $white;
   }
 }
 
-.featured {
-  background-color: $green;
-  color: $dark-gray;
-  text-align: center;
-  padding: 5px;
-}
+

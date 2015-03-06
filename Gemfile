@@ -10,8 +10,11 @@ gem 'omniauth-google-oauth2'
 gem 'mysql2'
 gem 'activerecord-session_store'
 gem 'high_voltage'
-gem 'role_model'
 gem 'cancancan'
+
+# Payments
+gem 'balanced'
+gem 'faraday', '~> 0.8.6'
 
 
 # Gems used only for assets and not required

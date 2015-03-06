@@ -1,5 +1,5 @@
 class TasksController < AuthenticatedController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index, :show]
   # GET /tasks
   # GET /tasks.json
   def index
@@ -17,6 +17,7 @@ class TasksController < AuthenticatedController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @task = Task.for(current_user).find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @task }

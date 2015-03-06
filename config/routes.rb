@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-
   root "welcome#index"
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
   resources :companies, only: [:edit, :update] do
-    resources :users, only: [:index], path: "employees"
+    resources :bank_accounts, only: [:new, :create]
+    resources :billing_plans, only: [:index], path: "billing"
+    resources :credit_cards, only: [:new, :create]
+    resources :users, only: [:index, :edit, :update], path: "employees"
+    resources :funding_instruments, only: [:index], path: "payment-methods"
     resources :settings, only: [:index]
     resources :tasks do
       resources :offers, only: [:create, :update]
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :registrations, only: [:new, :create]
 
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

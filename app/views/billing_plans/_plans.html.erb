@@ -1,0 +1,33 @@
+<div class="four-column-row">
+
+  <% (@plans || BillingPlan.active).each do |plan| %>
+    <div class="pricing-section <%= "recommended" if active_plan?(plan) %>">
+      <% if active_plan?(plan) %>
+        <div class="featured">
+          <strong>Selected</strong>
+        </div>
+      <% elsif plan.featured? %>
+        <div class="featured">
+          <strong>Most Popular</strong>
+        </div>
+      <% end %>
+      <div class="pricing-section-details">
+        <div class="price">
+          <h4><%= plan.name %></h4>
+          <em>$<%= plan.monthly_cost %></em><br>
+          /month
+        </div>
+        <%= plan.tasks %> tasks
+        <div>
+          <br><br>
+          <% if params[:controller] != "welcome" %>
+            <button <%= "disabled" if active_plan?(plan) %>>Select</button>
+          <% else %>
+            <button>Get Started</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>

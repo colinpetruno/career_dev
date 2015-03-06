@@ -1,0 +1,9 @@
+<h3>Credit Cards</h3>
+
+<%= link_to "New Card", new_company_credit_card_path, class: "btn" %>
+
+<h3>Bank Accounts</h3>
+<% current_user.company.bank_accounts.each do |account| %>
+  <%= account.description %> <br>
+<% end %>
+<%= link_to "New Bank Account", new_company_bank_account_path, class: "btn" %>

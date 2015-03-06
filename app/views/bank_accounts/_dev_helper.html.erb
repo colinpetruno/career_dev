@@ -1,0 +1,30 @@
+<br><br>
+
+<select id="dev-bank-populate">
+  <option value=""></option>
+  <option value="0">Invalid Routing Number</option>
+  <option value="1">Pending</option>
+  <option value="2">Succeeded</option>
+  <option value="3">Failed</option>
+</select>
+
+<% content_for(:footer) do %>
+  <script type="text/javascript">
+    $(function(){
+      var accounts = [
+        { routing: 100000007, account: 8887776665555 },
+        { routing: '021000021', account: 9900000000 },
+        { routing: '021000021', account: 9900000002 },
+        { routing: '021000021', account: 9900000004 }
+      ];
+
+      $("#dev-bank-populate").change(function(){
+        var optionedAccount = accounts[$(this).val()];
+
+        $("#ba-name").val("Test Name");
+        $("#ba-routing").val(optionedAccount.routing);
+        $("#ba-number").val(optionedAccount.account);
+      });
+    });
+  </script>
+<% end %>

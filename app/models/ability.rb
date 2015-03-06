@@ -8,6 +8,10 @@ class Ability
       can :manage, Task, company_id: user.company_id
       can :manage, Company, id: user.company_id
       can :manage, User, company_id: user.company_id
+      can :manage, BillingPlan
+      can :manage, FundingInstrument, company_id: user.company_id
+      can :manage, BankAccount, company_id: user.company_id
+      can :manage, CreditCard, company_id: user.company_id
     end
 
     # Define abilities for the passed in user here. For example:

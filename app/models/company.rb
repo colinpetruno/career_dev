@@ -1,5 +1,11 @@
 class Company < ActiveRecord::Base
+  belongs_to :billing_plan
   has_many :tasks
+  has_many :users
+  has_many :subscriptions
+  has_many :funding_instruments
+  has_many :credit_cards
+  has_many :bank_accounts
 
   validates :name, uniqueness: true
   validates :domain, uniqueness: true

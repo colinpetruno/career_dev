@@ -1,5 +1,20 @@
-this is users <br>
+<h3>Employees</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Points</th>
+  </tr>
 
-<% @users.each do |user| %>
-  <%= user.email %><br><br>
-<% end %>
+  <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= link_to "#{user.first_name} #{user.last_name}",
+          edit_company_user_path(current_user.company, user)
+        %>
+      </td>
+      <td><%= user.email %></td>
+      <td><%= user.points %></td>
+    </tr>
+  <% end %>
+</table>

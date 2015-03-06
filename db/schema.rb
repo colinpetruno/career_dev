@@ -11,18 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225025536) do
+ActiveRecord::Schema.define(version: 20150306042424) do
+
+  create_table "billing_plans", force: :cascade do |t|
+    t.string   "name",         limit: 255,                 null: false
+    t.integer  "users",        limit: 4,   default: 0,     null: false
+    t.integer  "tasks",        limit: 4
+    t.integer  "monthly_cost", limit: 4
+    t.integer  "yearly_cost",  limit: 4
+    t.boolean  "active",       limit: 1,   default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "featured",     limit: 1,   default: false, null: false
+  end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.string   "domain",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "slug",       limit: 255, null: false
+    t.string   "name",            limit: 255, null: false
+    t.string   "domain",          limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "slug",            limit: 255, null: false
+    t.integer  "billing_plan_id", limit: 4
   end
 
   add_index "companies", ["domain"], name: "index_companies_on_domain", unique: true, using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
+
+  create_table "funding_instruments", force: :cascade do |t|
+    t.string   "url",            limit: 255
+    t.integer  "company_id",     limit: 4
+    t.string   "type",           limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name",           limit: 255
+    t.string   "account_type",   limit: 255
+    t.string   "description",    limit: 255
+    t.string   "account_number", limit: 255
+  end
 
   create_table "offers", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,                 null: false
@@ -46,6 +71,15 @@ ActiveRecord::Schema.define(version: 20150225025536) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "company_id",      limit: 4,                null: false
+    t.integer  "billing_plan_id", limit: 4,                null: false
+    t.boolean  "active",          limit: 1, default: true, null: false
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string   "title",       limit: 255,                 null: false
     t.string   "description", limit: 255,                 null: false
@@ -61,24 +95,24 @@ ActiveRecord::Schema.define(version: 20150225025536) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255, default: "",         null: false
+    t.string   "encrypted_password",     limit: 255, default: "",         null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,          null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.string   "first_name",             limit: 255
-    t.integer  "points",                 limit: 4,   default: 0,  null: false
-    t.integer  "company_id",             limit: 4,                null: false
+    t.integer  "points",                 limit: 4,   default: 0,          null: false
+    t.integer  "company_id",             limit: 4,                        null: false
     t.string   "last_name",              limit: 255
     t.string   "title",                  limit: 255
-    t.integer  "roles_mask",             limit: 4
+    t.string   "role",                   limit: 255, default: "Employee", null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

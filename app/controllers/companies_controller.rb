@@ -3,7 +3,6 @@ class CompaniesController < AuthenticatedController
   layout "settings"
 
   def edit
-
   end
 
   def update
