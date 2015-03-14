@@ -8,8 +8,36 @@
 
 
 BillingPlan.create([
-  { name: "Small", users: 0, tasks: 50, monthly_cost: 25, yearly_cost: 250, active: true },
-  { name: "Medium", users: 0, tasks: 200, monthly_cost: 50, yearly_cost: 500, active: true },
-  { name: "Large", users: 0, tasks: 500, monthly_cost: 100, yearly_cost: 1000, active: true },
-  { name: "Unlimited", users: 0, tasks: 0, monthly_cost: 250, yearly_cost: 2500, active: true }
+  {
+    name: "Small",
+    users: 0,
+    tasks: 50,
+    monthly_cost: 25,
+    yearly_cost: 250,
+    active: true
+  },
+  {
+    name: "Medium",
+    users: 0,
+    tasks: 200,
+    monthly_cost: 50,
+    yearly_cost: 500,
+    active: true
+  },
+  {
+    name: "Large",
+    users: 0,
+    tasks: 500,
+    monthly_cost: 100,
+    yearly_cost: 1000,
+    active: true
+  },
+  {
+    name: "Unlimited",
+    users: 0,
+    tasks: 0,
+    monthly_cost: 250,
+    yearly_cost: 2500,
+    active: true
+  }
 ])

@@ -13,81 +13,84 @@
 
 ActiveRecord::Schema.define(version: 20150314153953) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "billing_plans", force: :cascade do |t|
-    t.string   "name",         limit: 255,                 null: false
-    t.integer  "users",        limit: 4,   default: 0,     null: false
-    t.integer  "tasks",        limit: 4
-    t.integer  "monthly_cost", limit: 4
-    t.integer  "yearly_cost",  limit: 4
-    t.boolean  "active",       limit: 1,   default: false, null: false
+    t.string   "name",                         null: false
+    t.integer  "users",        default: 0,     null: false
+    t.integer  "tasks"
+    t.integer  "monthly_cost"
+    t.integer  "yearly_cost"
+    t.boolean  "active",       default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "featured",     limit: 1,   default: false, null: false
+    t.boolean  "featured",     default: false, null: false
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",            limit: 255, null: false
-    t.string   "domain",          limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "slug",            limit: 255, null: false
-    t.integer  "billing_plan_id", limit: 4
-    t.string   "billing_url",     limit: 255
+    t.string   "name",            null: false
+    t.string   "domain"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "slug",            null: false
+    t.integer  "billing_plan_id"
+    t.string   "billing_url"
   end
 
   add_index "companies", ["domain"], name: "index_companies_on_domain", unique: true, using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
   create_table "funding_instruments", force: :cascade do |t|
-    t.string   "token",            limit: 255
-    t.integer  "company_id",       limit: 4
-    t.string   "type",             limit: 255
+    t.string   "token"
+    t.integer  "company_id"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",             limit: 255
-    t.string   "account_type",     limit: 255
-    t.string   "description",      limit: 255
-    t.string   "number",           limit: 255
-    t.string   "expiration_month", limit: 255
-    t.string   "expiration_year",  limit: 255
-    t.boolean  "primary",          limit: 1,   default: false, null: false
+    t.string   "name"
+    t.string   "account_type"
+    t.string   "description"
+    t.string   "number"
+    t.string   "expiration_month"
+    t.string   "expiration_year"
+    t.boolean  "primary",          default: false, null: false
   end
 
   create_table "offers", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4,                 null: false
-    t.integer  "task_id",    limit: 4,                 null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.boolean  "accepted",   limit: 1, default: false, null: false
-    t.boolean  "approved",   limit: 1, default: false, null: false
-    t.boolean  "completed",  limit: 1, default: false, null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "task_id",                    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "accepted",   default: false, null: false
+    t.boolean  "approved",   default: false, null: false
+    t.boolean  "completed",  default: false, null: false
   end
 
   add_index "offers", ["user_id", "task_id"], name: "index_offers_on_user_id_and_task_id", unique: true, using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.integer "company_id",            limit: 4,                   null: false
-    t.integer "funding_instrument_id", limit: 4,                   null: false
-    t.integer "amount_in_cents",       limit: 4,                   null: false
-    t.boolean "processed",             limit: 1,   default: false, null: false
-    t.integer "billing_plan_id",       limit: 4,                   null: false
-    t.string  "order_url",             limit: 255
-    t.string  "debit_url",             limit: 255
+    t.integer "company_id",                            null: false
+    t.integer "funding_instrument_id",                 null: false
+    t.integer "amount_in_cents",                       null: false
+    t.boolean "processed",             default: false, null: false
+    t.integer "billing_plan_id",                       null: false
+    t.string  "order_url"
+    t.string  "debit_url"
   end
 
   create_table "scheduled_payments", force: :cascade do |t|
-    t.integer  "company_id",          limit: 4,                                null: false
-    t.integer  "old_billing_plan_id", limit: 4,                                null: false
-    t.integer  "new_billing_plan_id", limit: 4,                                null: false
-    t.decimal  "amount",                        precision: 10,                 null: false
-    t.boolean  "completed",           limit: 1,                default: false, null: false
+    t.integer  "company_id",                          null: false
+    t.integer  "old_billing_plan_id",                 null: false
+    t.integer  "new_billing_plan_id",                 null: false
+    t.decimal  "amount",                              null: false
+    t.boolean  "completed",           default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.string   "session_id", limit: 255,   null: false
-    t.text     "data",       limit: 65535
+    t.string   "session_id", null: false
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -96,48 +99,48 @@ ActiveRecord::Schema.define(version: 20150314153953) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "title",       limit: 255,                 null: false
-    t.string   "description", limit: 255,                 null: false
-    t.integer  "difficulty",  limit: 4,                   null: false
-    t.integer  "fun_factor",  limit: 4,                   null: false
-    t.integer  "size",        limit: 4,                   null: false
-    t.string   "category",    limit: 255,                 null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.boolean  "closed",      limit: 1,   default: false, null: false
-    t.integer  "company_id",  limit: 4,                   null: false
-    t.string   "user_id",     limit: 255,                 null: false
+    t.string   "title",                       null: false
+    t.string   "description",                 null: false
+    t.integer  "difficulty",                  null: false
+    t.integer  "fun_factor",                  null: false
+    t.integer  "size",                        null: false
+    t.string   "category",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "closed",      default: false, null: false
+    t.integer  "company_id",                  null: false
+    t.string   "user_id",                     null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",         null: false
-    t.string   "encrypted_password",     limit: 255, default: "",         null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "",         null: false
+    t.string   "encrypted_password",     default: "",         null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,          null: false
+    t.integer  "sign_in_count",          default: 0,          null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
-    t.string   "first_name",             limit: 255
-    t.integer  "points",                 limit: 4,   default: 0,          null: false
-    t.integer  "company_id",             limit: 4,                        null: false
-    t.string   "last_name",              limit: 255
-    t.string   "title",                  limit: 255
-    t.string   "role",                   limit: 255, default: "Employee", null: false
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "first_name"
+    t.integer  "points",                 default: 0,          null: false
+    t.integer  "company_id",                                  null: false
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "role",                   default: "Employee", null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "verifications", force: :cascade do |t|
-    t.integer  "bank_account_id",    limit: 4
-    t.string   "status",             limit: 255
-    t.string   "href",               limit: 255
-    t.integer  "attempts_remaining", limit: 4
+    t.integer  "bank_account_id"
+    t.string   "status"
+    t.string   "href"
+    t.integer  "attempts_remaining"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

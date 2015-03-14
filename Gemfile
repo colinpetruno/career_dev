@@ -7,7 +7,7 @@ gem 'rails', '~> 4.2.0'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2' 
-gem 'mysql2'
+gem 'pg'
 gem 'activerecord-session_store'
 gem 'high_voltage'
 gem 'cancancan'
@@ -20,6 +20,7 @@ gem 'faraday', '~> 0.8.6'
 
 gem "resque", branch: "1-x-stable", github: "resque/resque"
 gem 'resque-web', require: 'resque_web'
+gem 'redis'
 gem "foreman"
 
 # Gems used only for assets and not required
