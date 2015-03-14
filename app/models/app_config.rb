@@ -1,4 +1,4 @@
-require_dependency 'lib/app_config_loader'
+require_dependency './lib/app_config_loader'
 class AppConfig
   include Singleton
 
