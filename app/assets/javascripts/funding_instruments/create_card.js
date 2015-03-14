@@ -1,19 +1,17 @@
 $(function(){
 
   function handleResponse(response) {
-
     if (response.status_code === 201) {
       var fundingInstrument = response.cards !== null ? response.cards[0] : response.bank_accounts[0];
 
-
-      console.log(fundingInstrument);
+      $('#credit_card_url').val(fundingInstrument.href);
+      $('#new_credit_card').off("submit").submit();
     } else {
-      console.log("Failed");
-      //       // Failed to tokenize, your error logic here
+      alert("Something went wrong");
     }
   }
 
-  $('#cc-submit').click(function (e) {
+  $('#new_credit_card').click(function (e) {
     e.preventDefault();
 
     var payload = {

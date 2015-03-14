@@ -1,23 +1,33 @@
 class BankAccount < FundingInstrument
   before_create :redeem_url
+  before_create :create_verification
+  before_create :associate_to_user
+  has_one :verification
 
   private
-  def redeem_url
-    self.name = bank_account[:bank_name]
-    self.account_type = bank_account[:account_type]
-    self.description = bank_account[:name]
-    self.account_number = bank_account[:account_number]
+
+  def details
+    @bank_account ||= fetch_bank_account
   end
 
-  def bank_account
-    unless @bank_account.present?
-      puts "BANK ACCOUNT BLANK - FETCHING"
-    end
-    @bank_account ||= fetch_bank_account[:bank_accounts].first
+  def associate_to_user
+    details.associate_to_customer(company.balanced_customer)
+  end
+
+  def create_verification
+    build_verification
+  end
+
+  def redeem_url
+    self.name = details.bank_name
+    self.account_type = details.account_type
+    self.description = details.name
+    self.number = details.account_number
+    self
   end
 
   def fetch_bank_account
-    Balanced::BankAccount.find(url)
+    Balanced::BankAccount.fetch(url)
   end
 end
 

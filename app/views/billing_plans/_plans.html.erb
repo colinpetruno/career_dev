@@ -21,7 +21,12 @@
         <div>
           <br><br>
           <% if params[:controller] != "welcome" %>
-            <button <%= "disabled" if active_plan?(plan) %>>Select</button>
+            <%= form_for [current_company, Payment.change_plan(current_company, plan)] do |f| %>
+              <%= f.hidden_field :funding_instrument_id %>
+              <%= f.hidden_field :billing_plan_id %>
+              <%= f.hidden_field :amount_in_cents %>
+              <%= f.submit "Select", disabled: active_plan?(plan) %>
+            <% end %>
           <% else %>
             <button>Get Started</button>
           <% end %>

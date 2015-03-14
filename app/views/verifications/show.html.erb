@@ -1,0 +1,11 @@
+<h1>Verify Your Bank Account</h1>
+Two deposits should appear on your bank statement.
+<br><br>
+<%= form_for [current_company, @account, @account.verification] do |f| %>
+  <%= f.label :amount_one %>
+  <%= f.text_field :amount_one %>
+
+  <%= f.label :amount_two %>
+  <%= f.text_field :amount_two %>
+  <%= f.submit %>
+<% end %>

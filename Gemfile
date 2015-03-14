@@ -16,6 +16,9 @@ gem 'cancancan'
 gem 'balanced'
 gem 'faraday', '~> 0.8.6'
 
+gem "resque", branch: "1-x-stable", github: "resque/resque"
+gem 'resque-web', require: 'resque_web'
+gem "foreman"
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -12,7 +12,6 @@ $(function(){
       $('#new_bank_account').off("submit").submit();
     } else {
       alert("Something went wrong");
-      console.log("Failed");
     }
   }
 

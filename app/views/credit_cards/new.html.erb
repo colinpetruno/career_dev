@@ -20,9 +20,12 @@
     <label>Postal Code</label>
     <input type="text" id="postal-code" autocomplete="off" placeholder="453" />
   </div>
-
-  <a id="cc-submit" class="button">Tokenize</a>
 </form>
+
+<%= form_for [current_company, @card] do |f| %>
+  <%= f.hidden_field :url %>
+  <%= f.submit class: "button" %>
+<% end %>
 
 
 
