@@ -5,7 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+Registration.new(
+  company_name: "Company One",
+  first_name: "Colin",
+  last_name: "Petruno",
+  email: "cpetruno@example.com",
+  password: "test1234",
+  password_confirmation: "test1234"
+).register
 
 BillingPlan.create([
   {
