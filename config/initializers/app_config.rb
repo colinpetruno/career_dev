@@ -1,1 +1,1 @@
-require "app_config_loader"
+require "./lib/app_config_loader"
