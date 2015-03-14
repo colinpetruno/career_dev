@@ -1,29 +1,32 @@
-<form role="form">
+<form role="form" id="credit-card-form">
   <div>
     <label>Name on Card</label>
     <input type="text" id="card-name" autocomplete="off" placeholder="John Doe" />
   </div>
   <div>
     <label>Card Number</label>
-    <input type="text" id="card-number" autocomplete="off" placeholder="4111111111111111" maxlength="16" />
+    <input type="text" id="card-number" autocomplete="off" placeholder="4111111111111111" maxlength="16" data-stripe="number" />
   </div>
   <div>
     <label>Expiration</label>
-    <input type="text" id="cc-ex-month" autocomplete="off" placeholder="01" maxlength="2" />
-    <input type="text" id="cc-ex-year" autocomplete="off" placeholder="2013" maxlength="4" />
+    <input type="text" id="cc-ex-month" autocomplete="off" placeholder="01" maxlength="2" data-stripe="exp-month" />
+    <input type="text" id="cc-ex-year" autocomplete="off" placeholder="2013" maxlength="4" data-stripe="exp-year" />
   </div>
   <div>
-    <label>Card Verification Code (CVV)</label>
-    <input type="text" id="card-cvv" autocomplete="off" placeholder="453" maxlength="4" />
+    <label>Card Verification Code (CVC)</label>
+    <input type="text" id="card-cvv" autocomplete="off" placeholder="453" maxlength="4" data-stripe="cvc"/>
   </div>
   <div>
     <label>Postal Code</label>
     <input type="text" id="postal-code" autocomplete="off" placeholder="453" />
   </div>
+
+  <div class="payment-errors"></div>
 </form>
 
+
 <%= form_for [current_company, @card] do |f| %>
-  <%= f.hidden_field :url %>
+  <%= f.hidden_field :token %>
   <%= f.submit class: "button" %>
 <% end %>
 

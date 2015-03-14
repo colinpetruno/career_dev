@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
     <%= csrf_meta_tag %>
-    <title>Careers</title>
+    <title>Treehaus</title>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +34,7 @@
 
     <%= javascript_include_tag("application") %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://js.balancedpayments.com/1.1/balanced.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <%= yield(:footer) if content_for?(:footer)%>
   </body>
 </html>

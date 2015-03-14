@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311003558) do
+ActiveRecord::Schema.define(version: 20150314153953) do
 
   create_table "billing_plans", force: :cascade do |t|
     t.string   "name",         limit: 255,                 null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150311003558) do
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
   create_table "funding_instruments", force: :cascade do |t|
-    t.string   "url",              limit: 255
+    t.string   "token",            limit: 255
     t.integer  "company_id",       limit: 4
     t.string   "type",             limit: 255
     t.datetime "created_at"

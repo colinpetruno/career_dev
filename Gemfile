@@ -14,6 +14,8 @@ gem 'cancancan'
 
 # Payments
 gem 'balanced'
+gem 'stripe'
+
 gem 'faraday', '~> 0.8.6'
 
 gem "resque", branch: "1-x-stable", github: "resque/resque"

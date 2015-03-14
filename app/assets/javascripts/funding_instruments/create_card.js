@@ -1,30 +1,22 @@
 $(function(){
-
-  function handleResponse(response) {
-    if (response.status_code === 201) {
-      var fundingInstrument = response.cards !== null ? response.cards[0] : response.bank_accounts[0];
-
-      $('#credit_card_url').val(fundingInstrument.href);
-      $('#new_credit_card').off("submit").submit();
+  function stripResponseHandler(status, response) {
+    if (response.error) {
+      $form.find('.payment-errors').text(response.error.message);
+      $form.find('button').prop('disabled', false);
     } else {
-      alert("Something went wrong");
+      var token = response.id;
+      $('#credit_card_token').val(token);
+      $('#new_credit_card').off("submit").submit();
     }
   }
 
-  $('#new_credit_card').click(function (e) {
+  $('#new_credit_card').submit(function (e) {
     e.preventDefault();
 
-    var payload = {
-      name: $('#card-name').val(),
-      number: $('#card-number').val(),
-      expiration_month: $('#cc-ex-month').val(),
-      expiration_year: $('#cc-ex-year').val(),
-      cvv: $('#card-cvv').val(),
-      address: {
-        postal_code: $('#postal-code').val()
-      }
-    };
+    var $form = $("#credit-card-form");
+    $form.find("input[type=text]").prop("disabled", true);
 
-    balanced.card.create(payload, handleResponse);
+    Stripe.card.createToken($form, stripeResponseHandler);
+    return false;
   });
 });
