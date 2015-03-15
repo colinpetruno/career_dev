@@ -10,17 +10,16 @@ class Company < ActiveRecord::Base
   validates :name, uniqueness: true
   validates :domain, uniqueness: true
 
-  before_create :create_customer
   before_save :set_slug
 
-  def self.create_or_associate(user)
-    company = Company.where(domain: user.domain)
-    if company.blank?
-      user.build_company(domain: user.domain, name: user.domain)
-    else
-      user.company = company
-    end
-  end
+  #def self.create_or_associate(user)
+    #company = Company.where(domain: user.domain)
+    #if company.blank?
+      #user.build_company(domain: user.domain, name: user.domain)
+    #else
+      #user.company = company
+    #end
+  #end
 
   def to_param
     slug
@@ -31,19 +30,6 @@ class Company < ActiveRecord::Base
   end
 
   private
-
-  def create_customer
-    customer = Balanced::Customer.new(
-      business_name: self.name,
-      name: self.name,
-      address: {
-        postal_code: 02115
-      }
-    )
-    customer.save
-    self.billing_url = customer.href
-  end
-
 
   def set_slug
     self.slug = name.parameterize

@@ -37,10 +37,6 @@ class User < ActiveRecord::Base
     update_column(:points, sum_points)
   end
 
-  def create_or_associate_company
-    Company.create_or_associate(self)
-  end
-
   def is?(type)
     ROLES.include?(type.to_s.titleize) && role.eql?(type.to_s.titleize)
   end

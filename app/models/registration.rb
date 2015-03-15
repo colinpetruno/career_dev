@@ -8,9 +8,9 @@ class Registration
     :company_name,
     :password,
     :password_confirmation,
-    :user
+    :user,
+    :company
   )
-
 
   validates :company_name, presence: true
   validates :first_name, presence: true
@@ -28,17 +28,35 @@ class Registration
   end
 
   def create_and_save_user
-    self.user = User.new(
+
+    self.company = Company.new(name: company_name)
+    self.company.users.build(
       email: email,
       password: password,
       password_confirmation: password_confirmation,
       first_name: first_name,
-      last_name: last_name
+      last_name: last_name,
+      role: "Company Admin"
     )
-    self.user.role = "Company Admin"
-    self.user.build_company(name: company_name)
 
-    self.user.save
+#    self.user = User.new(
+      #email: email,
+      #password: password,
+      #password_confirmation: password_confirmation,
+      #first_name: first_name,
+      #last_name: last_name
+    #)
+    #self.user.role = "Company Admin"
+    #self.user.build_company(name: company_name)
+
+
+    if self.company.save
+      true
+    else
+      self.errors.add(self.company.errors)
+      self.errors.add(self.company.users.first.errors)
+      false
+    end
   end
 
 end
