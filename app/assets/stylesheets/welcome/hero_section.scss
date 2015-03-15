@@ -1,5 +1,9 @@
 #hero-section {
-  background-image: url("/assets/home_page/background-2.jpg");
+  //background-image: url("/assets/home_page/background-2.jpg");
+  // background-image: url(<%= asset_path('home_page/background-2.jpg') %>);
+
+  background-image: url(asset-path("home_page/background-2.jpg"));
+
   background-size: cover;
   color: $white;
   min-height: 450px;
