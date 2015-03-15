@@ -10,10 +10,9 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new(registration_params)
     if @registration.register
       sign_in(@registration.user)
-      respond_with @registration, location: tasks_path
-    else
-      render "new"
     end
+
+    respond_with @registration, location: company_tasks_path(current_company)
   end
 
   private

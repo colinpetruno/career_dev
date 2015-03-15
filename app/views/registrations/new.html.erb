@@ -4,18 +4,6 @@
       <div>
         <h1>Get Started</h1>
 
-        <div>
-          <% if @registration.errors.any? %>
-            <div id="error_explanation">
-              <ul>
-                <% @registration.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        </div>
-
         <%= f.label :company_name %>
         <%= f.text_field :company_name %>
 
@@ -33,6 +21,18 @@
 
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation %>
+
+        <div>
+          <% if @registration.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+                <% @registration.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
 
         <%= f.submit %>
 

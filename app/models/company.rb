@@ -8,7 +8,7 @@ class Company < ActiveRecord::Base
   has_many :payments
 
   validates :name, uniqueness: true
-  validates :domain, uniqueness: true
+  # validates :domain, uniqueness: true
 
   before_save :set_slug
 

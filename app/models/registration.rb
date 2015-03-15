@@ -1,5 +1,6 @@
 class Registration
   include ActiveModel::Model
+  # include ActiveModel::Errors
 
   attr_accessor(
     :first_name,
@@ -28,9 +29,8 @@ class Registration
   end
 
   def create_and_save_user
-
     self.company = Company.new(name: company_name)
-    self.company.users.build(
+    self.user = User.new(
       email: email,
       password: password,
       password_confirmation: password_confirmation,
@@ -38,24 +38,23 @@ class Registration
       last_name: last_name,
       role: "Company Admin"
     )
-
-#    self.user = User.new(
-      #email: email,
-      #password: password,
-      #password_confirmation: password_confirmation,
-      #first_name: first_name,
-      #last_name: last_name
-    #)
-    #self.user.role = "Company Admin"
-    #self.user.build_company(name: company_name)
-
+    self.company.users << self.user
 
     if self.company.save
       true
     else
-      self.errors.add(self.company.errors)
-      self.errors.add(self.company.users.first.errors)
+      collect_errors
       false
+    end
+  end
+
+  def collect_errors
+    self.company.errors.each do |key, value|
+      self.errors.add(key, value)
+    end
+
+    self.user.errors.each do |key, value|
+      self.errors.add(key, value)
     end
   end
 
