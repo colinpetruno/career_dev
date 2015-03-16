@@ -14,7 +14,7 @@
       <div class="pricing-section-details">
         <div class="price">
           <h4><%= plan.name %></h4>
-          <em>$<%= plan.monthly_cost %></em><br>
+          <em>$<%= plan.monthly_cost_in_dollars %></em><br>
           /month
         </div>
         <%= plan.tasks %> tasks
@@ -28,7 +28,7 @@
               <%= f.submit "Select", disabled: active_plan?(plan) %>
             <% end %>
           <% else %>
-            <button>Get Started</button>
+            <%= link_to "Get Started", new_registration_path(plan_id: plan.id), class: "button" %>
           <% end %>
         </div>
       </div>

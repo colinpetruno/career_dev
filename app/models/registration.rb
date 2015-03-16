@@ -10,15 +10,20 @@ class Registration
     :password,
     :password_confirmation,
     :user,
-    :company
+    :company,
+    :plan_id,
+    :frequency
   )
 
   validates :company_name, presence: true
+  validates :email, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true
   validates :password, presence: true
   validates :password_confirmation, presence: true
+  validates :plan_id, presence: true
+  validates :frequency, presence: true
+
 
   def register
     if valid?
@@ -29,7 +34,12 @@ class Registration
   end
 
   def create_and_save_user
-    self.company = Company.new(name: company_name)
+    self.company = Company.new(
+      name: company_name,
+      billing_plan_id: plan_id.to_i,
+      billing_frequency: frequency.downcase
+    )
+
     self.user = User.new(
       email: email,
       password: password,

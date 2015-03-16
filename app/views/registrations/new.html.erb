@@ -1,8 +1,18 @@
 <div id="new-registration-form">
   <%= form_for @registration do |f| %>
+    <%= f.hidden_field :plan_id %>
     <div class="two-column-row">
       <div>
         <h1>Get Started</h1>
+
+        <%= f.label :frequency %>
+        <%= f.collection_radio_buttons(
+          :frequency,
+          BillingPlan::FREQUENCIES,
+          :to_s,
+          :to_s
+        ) %>
+        <p>2 months free for yearly membership</p>
 
         <%= f.label :company_name %>
         <%= f.text_field :company_name %>

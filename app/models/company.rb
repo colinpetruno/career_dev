@@ -11,6 +11,7 @@ class Company < ActiveRecord::Base
   # validates :domain, uniqueness: true
 
   before_save :set_slug
+  after_create :create_payment_customer
 
   #def self.create_or_associate(user)
     #company = Company.where(domain: user.domain)
@@ -25,11 +26,19 @@ class Company < ActiveRecord::Base
     slug
   end
 
-  def balanced_customer
-    @customer ||= Balanced::Customer.fetch(billing_url)
+  def stripe_customer
+    @customer ||= Stripe::Customer.retrieve(stripe_id)
   end
 
   private
+
+  def create_payment_customer
+    customer = Stripe::Customer.create(
+      description: self.name,
+      plan: "#{billing_frequency}_#{billing_plan_id}"
+    )
+    update_column(:stripe_id, customer.id)
+  end
 
   def set_slug
     self.slug = name.parameterize

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315041602) do
+ActiveRecord::Schema.define(version: 20150316015953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,13 +29,14 @@ ActiveRecord::Schema.define(version: 20150315041602) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",                                  null: false
     t.string   "domain"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "slug",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "slug",                                  null: false
     t.integer  "billing_plan_id"
-    t.string   "billing_url"
+    t.string   "stripe_id"
+    t.string   "billing_frequency", default: "monthly", null: false
   end
 
   add_index "companies", ["domain"], name: "index_companies_on_domain", unique: true, using: :btree

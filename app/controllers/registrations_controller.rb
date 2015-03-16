@@ -3,7 +3,12 @@ class RegistrationsController < ApplicationController
   before_filter :check_for_current_user
 
   def new
-    @registration = Registration.new
+    # TODO: Improve this experience
+    redirect_to root_path if params[:plan_id].blank?
+    @registration = Registration.new(
+      plan_id: params[:plan_id],
+      frequency: "Monthly"
+    )
   end
 
   def create
@@ -30,7 +35,9 @@ class RegistrationsController < ApplicationController
         :last_name,
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :frequency,
+        :plan_id
       )
   end
 end

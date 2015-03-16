@@ -1,17 +1,21 @@
 <header class="navigation" role="banner">
   <div class="navigation-wrapper">
     <% if user_signed_in? %>
-      <%= link_to( image_tag("logos/logo.png"), company_tasks_path(current_user.company), class: "logo") %>
+      <%= link_to( image_tag("logos/logo.png"),
+                  company_tasks_path(current_user.company),
+                  class: "logo")
+      %>
     <% else %>
       <%= link_to( image_tag("logos/logo.png"), root_path, class: "logo") %>
     <% end %>
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
 
-    <% unless user_signed_in? %>
+    <% if 1 == 2 %>
       <div class="navigation-tools">
         <%= link_to t(".sign_up"), new_registration_path, class: "sign-up" %>
       </div>
     <% end %>
+
     <nav role="navigation">
       <% if user_signed_in? %>
         <%= render partial: "shared/logged_in_nav" %>
