@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317001550) do
+ActiveRecord::Schema.define(version: 20150317023105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,16 +68,6 @@ ActiveRecord::Schema.define(version: 20150317001550) do
   end
 
   add_index "offers", ["user_id", "task_id"], name: "index_offers_on_user_id_and_task_id", unique: true, using: :btree
-
-  create_table "payments", force: :cascade do |t|
-    t.integer "company_id",                            null: false
-    t.integer "funding_instrument_id",                 null: false
-    t.integer "amount_in_cents",                       null: false
-    t.boolean "processed",             default: false, null: false
-    t.integer "billing_plan_id",                       null: false
-    t.string  "order_url"
-    t.string  "debit_url"
-  end
 
   create_table "scheduled_payments", force: :cascade do |t|
     t.integer  "company_id",                          null: false
