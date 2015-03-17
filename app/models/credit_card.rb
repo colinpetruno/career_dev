@@ -1,15 +1,22 @@
 class CreditCard < FundingInstrument
-  before_create :redeem_url
+  before_create :redeem_token
+  # TODO: Align attribute names to database
 
   private
 
-  def redeem_url
-    self.name = details.bank_name
-    self.description = details.brand
-    self.number = details.number
-    self.account_type = details.type
-    self.expiration_month = details.expiration_month
-    self.expiration_year = details.expiration_year
+  def redeem_token
+    customer = company.stripe_customer
+    card = customer.sources.create({source: token})
+    self.stripe_id = card.id
+
+    # self.name
+    self.description = card.brand
+
+    self.number = card.last4
+    #self.account_type = details.type
+
+    self.expiration_month = card.exp_month
+    self.expiration_year = card.exp_year
     self
   end
 
@@ -18,6 +25,7 @@ class CreditCard < FundingInstrument
   end
 
   def fetch_credit_card
-    Balanced::Card.fetch(url)
+    customer = company.stripe_customer
+    customer.sources.retrieve(stripe_id)
   end
 end

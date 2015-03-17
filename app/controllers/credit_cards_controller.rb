@@ -17,6 +17,6 @@ class CreditCardsController < FundingInstrumentsController
   def credit_card_params
     params.
       require(:credit_card).
-      permit(:url)
+      permit(:token, :name)
   end
 end

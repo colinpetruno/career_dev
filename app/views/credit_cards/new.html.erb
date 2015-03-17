@@ -1,5 +1,9 @@
 <form role="form" id="credit-card-form">
   <div>
+    <label>Description</label>
+    <input type="text" id="card-description" autocomplete="off"  />
+  </div>
+  <div>
     <label>Name on Card</label>
     <input type="text" id="card-name" autocomplete="off" placeholder="John Doe" />
   </div>
@@ -27,6 +31,7 @@
 
 <%= form_for [current_company, @card] do |f| %>
   <%= f.hidden_field :token %>
+  <%= f.hidden_field :name %>
   <%= f.submit class: "button" %>
 <% end %>
 

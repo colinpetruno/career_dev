@@ -19,31 +19,33 @@
 <% end %>
 <%= link_to "New Card", new_company_credit_card_path, class: "button" %>
 
-<br><br>
-<h3>Bank Accounts</h3>
-<% if current_company.bank_accounts.present? %>
-  <table>
-    <tr>
-      <th>Description</th>
-      <th>Name</th>
-      <th>Number</th>
-      <th>Verification</th>
-    </tr>
-
-    <% current_company.bank_accounts.each do |account| %>
+<% if 1==2 %>
+  <br><br>
+  <h3>Bank Accounts</h3>
+  <% if current_company.bank_accounts.present? %>
+    <table>
       <tr>
-        <td><%= account.description %></td>
-        <td><%= account.name %></td>
-        <td><%= account.number %></td>
-        <td>
-          <% if account.verification.status != Verification::SUCCEEDED %>
-            <%= link_to "Verify", company_bank_account_verification_path(current_company, account) %>
-          <% else %>
-            Verified
-          <% end %>
-        </td>
+        <th>Description</th>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Verification</th>
       </tr>
-    <% end %>
-  </table>
+
+      <% current_company.bank_accounts.each do |account| %>
+        <tr>
+          <td><%= account.description %></td>
+          <td><%= account.name %></td>
+          <td><%= account.number %></td>
+          <td>
+            <% if account.verification.status != Verification::SUCCEEDED %>
+              <%= link_to "Verify", company_bank_account_verification_path(current_company, account) %>
+            <% else %>
+              Verified
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+  <%= link_to "New Bank Account", new_company_bank_account_path, class: "button" %>
 <% end %>
-<%= link_to "New Bank Account", new_company_bank_account_path, class: "button" %>
