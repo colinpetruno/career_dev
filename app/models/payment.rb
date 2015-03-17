@@ -9,7 +9,6 @@ class Payment < ActiveRecord::Base
   def self.change_plan(company, new_plan)
     # funding instrument
     new(company: company,
-        funding_instrument: company.funding_instruments.primary,
         amount_in_cents: changed_plan_cost(company, new_plan),
         billing_plan_id: new_plan.id
        )

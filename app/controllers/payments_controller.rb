@@ -1,4 +1,5 @@
 class PaymentsController < AuthenticatedController
+  # TODO: DELETE ME
   def create
     payment = current_company.payments.build(payment_params)
     if payment.save

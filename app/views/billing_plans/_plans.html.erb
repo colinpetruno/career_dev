@@ -21,10 +21,8 @@
         <div>
           <br><br>
           <% if params[:controller] != "welcome" %>
-            <%= form_for [current_company, Payment.change_plan(current_company, plan)] do |f| %>
-              <%= f.hidden_field :funding_instrument_id %>
-              <%= f.hidden_field :billing_plan_id %>
-              <%= f.hidden_field :amount_in_cents %>
+            <%= form_for [current_company, current_company.subscription] do |f| %>
+              <%= f.hidden_field :billing_plan_id, value: plan.id %>
               <%= f.submit "Select", disabled: active_plan?(plan) %>
             <% end %>
           <% else %>

@@ -5,7 +5,7 @@ class Company < ActiveRecord::Base
   has_many :funding_instruments
   has_many :credit_cards
   has_many :bank_accounts
-  has_many :payments
+  has_one :subscription
 
   validates :name, uniqueness: true
   # validates :domain, uniqueness: true
@@ -35,9 +35,10 @@ class Company < ActiveRecord::Base
   def create_payment_customer
     customer = Stripe::Customer.create(
       description: self.name,
-      plan: "#{billing_frequency}_#{billing_plan_id}"
+      plan: "#{subscription.frequency}_#{subscription.billing_plan_id}"
     )
     update_column(:stripe_id, customer.id)
+    subscription.update_column(:stripe_id, customer.subscription.id)
   end
 
   def set_slug

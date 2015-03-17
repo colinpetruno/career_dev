@@ -12,7 +12,8 @@ class Registration
     :user,
     :company,
     :plan_id,
-    :frequency
+    :frequency,
+    :subscription
   )
 
   validates :company_name, presence: true
@@ -35,9 +36,12 @@ class Registration
 
   def create_and_save_user
     self.company = Company.new(
-      name: company_name,
+      name: company_name
+    )
+
+    self.subscription = Subscription.new(
       billing_plan_id: plan_id.to_i,
-      billing_frequency: frequency.downcase
+      frequency: frequency.downcase
     )
 
     self.user = User.new(
@@ -48,7 +52,9 @@ class Registration
       last_name: last_name,
       role: "Company Admin"
     )
+
     self.company.users << self.user
+    self.company.subscription = self.subscription
 
     if self.company.save
       true

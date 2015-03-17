@@ -2,12 +2,15 @@ class Subscription < ActiveRecord::Base
   belongs_to :company
   belongs_to :billing_plan
 
-  def self.active_for(company)
-    where({company_id: company.id, active: true}).first
+  before_save :queue_update_plan, if: :billing_plan_id_changed?
+
+  def plan_name
+    "#{self.frequency}_#{self.billing_plan_id}"
   end
 
-  def self.billing_plan_for(company)
-    where({company_id: company.id, active: true}).first.billing_plan
-  end
+  private
 
+  def queue_update_plan
+    Resque.enqueue(UpdateSubscription, self.id)
+  end
 end
