@@ -46,5 +46,13 @@ group :development do
   gem "better_errors"
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem "spring"
+  gem "guard-rails"
+  gem "guard-rspec"
+  gem "factory_girl_rails"
+end
+
 gem 'jquery-rails'
 
