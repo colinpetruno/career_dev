@@ -17,23 +17,27 @@
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :difficulty %><br />
-    <%= f.number_field :difficulty %>
+    <%= f.label :difficulty %>
+    <%= f.select :difficulty, options_for_select((1..5), 3) %>
   </div>
   <div class="field">
     <%= f.label :fun_factor %><br />
-    <%= f.number_field :fun_factor %>
+    <%= f.select :fun_factor, options_for_select((1..5), 3) %>
   </div>
   <div class="field">
     <%= f.label :size %><br />
-    <%= f.number_field :size %>
+    <%= f.select :size, options_for_select((1..5), 3) %>
   </div>
   <div class="field">
-    <%= f.label :category %><br />
-    <%= f.text_field :category %>
+    <%= f.label :category_id %><br />
+    <%= f.select :category_id, options_from_collection_for_select(
+          current_company.categories, :id, :name
+        ),
+        include_blank: true
+    %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -3,10 +3,13 @@ class TasksController < AuthenticatedController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.
-      for(current_user).
-      all.
-      group_by { |tasks| tasks.category }
+    @tasks = current_company.
+      tasks.
+      with_category(params[:category] || nil).
+      includes(:category).
+      page(params[:page])
+
+    @categories = current_company.categories.includes(:tasks)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -73,7 +76,7 @@ class TasksController < AuthenticatedController
   def task_params
     params.
       require(:task).
-      permit(:category, :description, :difficulty, :fun_factor, :size, :title, :company_id, :user_id).
+      permit(:category_id, :description, :difficulty, :fun_factor, :size, :title, :company_id, :user_id).
       merge(user_id: current_user.id, company_id: current_user.company_id)
   end
 

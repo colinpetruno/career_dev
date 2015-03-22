@@ -1,6 +1,5 @@
 <section>
   <div>
-
     <div class="two-column-row">
       <div>
         <h1>Tasks</h1>
@@ -13,7 +12,7 @@
     <% if @tasks.present? %>
       <%= render partial: "tasks" %>
     <% else %>
-      No tasks exist yet, TODO: Make some better copy for this
+      <%= render partial: "no_tasks_present" %>
     <% end %>
   </div>
 </section>

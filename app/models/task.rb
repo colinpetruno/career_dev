@@ -1,12 +1,22 @@
 class Task < ActiveRecord::Base
-
+  paginates_per 15
   # i left off needing to be able to approve an offer an admin
   # which should recalculate the points for the user
   DIFFICULTY = [1,2,3,4,5]
-  CATEGORIES = %w(Marketing Product Development)
 
+  has_many :followup_tasks, class_name: "Task", foreign_key: :prerequisite_id
   has_many :offers
   has_many :users, through: :offers
+  belongs_to :category
+  belongs_to :prerequisite, class_name: "Task"
+
+  scope :with_category, proc { |category_id|
+    if (category_id.present?)
+      where(category_id: category_id)
+    end
+  }
+
+
 
   def self.for(user)
     where(company_id: user.company_id)

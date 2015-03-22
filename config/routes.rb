@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resource :verification
     end
     resource :billing_plan, path: "billing"
+    resources :categories
     resources :credit_cards, only: [:new, :create]
     resources :users, only: [:index, :edit, :update], path: "employees"
     resources :funding_instruments, only: [:index], path: "payment-methods"

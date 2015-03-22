@@ -1,9 +1,16 @@
 <section>
   <div class="contain">
+    <div class="two-column-row">
+      <div>
     <h1>New task</h1>
 
-    <%= render 'form' %>
+    <%= render partial: "form" %>
 
     <%= link_to 'Back', company_tasks_path(current_user.company) %>
+      </div>
+      <div>
+        <h3>Prerequisites</h3>
+      </div>
+    </div>
   </div>
 </div>

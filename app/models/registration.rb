@@ -25,7 +25,6 @@ class Registration
   validates :plan_id, presence: true
   validates :frequency, presence: true
 
-
   def register
     if valid?
       create_and_save_user

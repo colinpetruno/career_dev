@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317025523) do
+ActiveRecord::Schema.define(version: 20150322132054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,19 @@ ActiveRecord::Schema.define(version: 20150317025523) do
     t.boolean  "featured",     default: false, null: false
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.integer  "company_id", null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string   "name",                                  null: false
     t.string   "domain"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.string   "slug",                                  null: false
-    t.integer  "billing_plan_id"
     t.string   "stripe_id"
     t.string   "billing_frequency", default: "monthly", null: false
   end
@@ -70,6 +76,11 @@ ActiveRecord::Schema.define(version: 20150317025523) do
 
   add_index "offers", ["user_id", "task_id"], name: "index_offers_on_user_id_and_task_id", unique: true, using: :btree
 
+  create_table "prequisitable", force: :cascade do |t|
+    t.integer "task_id",         null: false
+    t.integer "prerequisite_id", null: false
+  end
+
   create_table "scheduled_payments", force: :cascade do |t|
     t.integer  "company_id",                          null: false
     t.integer  "old_billing_plan_id",                 null: false
@@ -93,7 +104,7 @@ ActiveRecord::Schema.define(version: 20150317025523) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "billing_plan_id",                     null: false
     t.integer  "company_id",                          null: false
-    t.string   "stripe_id",                           null: false
+    t.string   "stripe_id"
     t.string   "frequency",       default: "monthly", null: false
     t.boolean  "active",          default: true,      null: false
     t.datetime "created_at"
@@ -102,16 +113,16 @@ ActiveRecord::Schema.define(version: 20150317025523) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title",                       null: false
-    t.string   "description",                 null: false
     t.integer  "difficulty",                  null: false
     t.integer  "fun_factor",                  null: false
     t.integer  "size",                        null: false
-    t.string   "category",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "closed",      default: false, null: false
     t.integer  "company_id",                  null: false
     t.string   "user_id",                     null: false
+    t.string   "description",                 null: false
+    t.integer  "category_id",                 null: false
   end
 
   create_table "users", force: :cascade do |t|

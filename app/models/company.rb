@@ -1,26 +1,24 @@
 class Company < ActiveRecord::Base
-  belongs_to :billing_plan
+  DEFAULT_CATEGORIES = %w(
+    Engineering
+    Marketing
+    Product
+    Sales
+  )
+
+  has_many :bank_accounts
+  has_many :categories
+  has_many :credit_cards
+  has_many :funding_instruments
   has_many :tasks
   has_many :users
-  has_many :funding_instruments
-  has_many :credit_cards
-  has_many :bank_accounts
   has_one :subscription
 
   validates :name, uniqueness: true
-  # validates :domain, uniqueness: true
 
   before_save :set_slug
   after_create :create_payment_customer
-
-  #def self.create_or_associate(user)
-    #company = Company.where(domain: user.domain)
-    #if company.blank?
-      #user.build_company(domain: user.domain, name: user.domain)
-    #else
-      #user.company = company
-    #end
-  #end
+  before_create :create_default_categories
 
   def to_param
     slug
@@ -32,13 +30,22 @@ class Company < ActiveRecord::Base
 
   private
 
+  def create_default_categories
+    DEFAULT_CATEGORIES.each do |category|
+      self.categories.build(name: category)
+    end
+  end
+
   def create_payment_customer
     customer = Stripe::Customer.create(
       description: self.name,
       plan: "#{subscription.frequency}_#{subscription.billing_plan_id}"
     )
+
     update_column(:stripe_id, customer.id)
-    subscription.update_column(:stripe_id, customer.subscription.id)
+
+    subscription.
+      update_column(:stripe_id, customer.subscriptions.first.id)
   end
 
   def set_slug

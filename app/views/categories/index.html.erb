@@ -1,0 +1,23 @@
+<h1>Categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th># Tasks</th>
+    <th></th>
+  </tr>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= category.tasks.count %></td>
+        <td><%= link_to "Edit", edit_company_category_path(current_company, category) %></td>
+      </tr>
+
+    <% end %>
+</table>
+
+
+<%= link_to "New Category",
+  new_company_category_path(current_company),
+  class: "button"
+%>

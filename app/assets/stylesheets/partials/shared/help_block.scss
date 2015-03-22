@@ -1,0 +1,16 @@
+.help-block {
+  border: 10px solid $green;
+  padding: 15px;
+  text-align: center;
+
+  i {
+    color: $light-gray;
+    font-size: 120px;
+  }
+
+  .seperator{
+    border: 1px solid $medium-gray;
+    margin: auto;
+    width: 350px;
+  }
+}
