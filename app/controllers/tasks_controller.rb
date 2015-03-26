@@ -13,6 +13,7 @@ class TasksController < AuthenticatedController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.json { render json: @tasks }
     end
   end
@@ -30,6 +31,12 @@ class TasksController < AuthenticatedController
   # GET /tasks/new
   # GET /tasks/new.json
   def new
+    @tasks = current_company.
+      tasks.
+      with_category(params[:category] || nil).
+      includes(:category).
+      page(params[:page])
+
     @task = Task.from(current_user)
 
     respond_to do |format|

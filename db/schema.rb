@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150322132054) do
 
   add_index "offers", ["user_id", "task_id"], name: "index_offers_on_user_id_and_task_id", unique: true, using: :btree
 
-  create_table "prequisitable", force: :cascade do |t|
+  create_table "prerequisitables", force: :cascade do |t|
     t.integer "task_id",         null: false
     t.integer "prerequisite_id", null: false
   end

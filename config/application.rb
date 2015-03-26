@@ -25,5 +25,19 @@ module CareerDev
     config.serve_static_files = true
 
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
+
+    config.active_record.dump_schema_after_migration = false
+
+    config.action_mailer.default_url_options = { :host => 'www.example.com' }
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.mandrillapp.com",
+      port: 587,
+      user_name: ENV['MANDRILL_USER'],
+      password: ENV['MANDRILL_API_KEY'],
+      authentication: 'login', # Mandrill supports 'plain' or 'login'
+      enable_starttls_auto: true # detects and uses STARTTLS
+    }
   end
 end

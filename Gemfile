@@ -12,6 +12,7 @@ gem "pg"
 gem "activerecord-session_store"
 gem "high_voltage"
 gem "cancancan"
+gem "dotenv-rails"
 
 # Payments
 gem "balanced"
@@ -40,6 +41,7 @@ gem "bourbon"
 gem "neat"
 
 gem "kaminari"
+gem "mandrill_mailer"
 
 group :development do 
   gem "byebug"

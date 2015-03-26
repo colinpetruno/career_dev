@@ -10,6 +10,26 @@
       </div>
       <div>
         <h3>Prerequisites</h3>
+
+        <table id="tasks-table">
+          <tr>
+            <th>Name</th>
+            <th>Created At</th>
+          </tr>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= task.title %></td>
+              <td><%= task.created_at %></td>
+            </tr>
+          <% end %>
+        </table>
+
+        <div id="task-table-pagination">
+          <%= paginate @tasks,
+            remote: true,
+            params: {controller: 'tasks', action: 'index'}
+          %>
+        </div>
       </div>
     </div>
   </div>

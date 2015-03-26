@@ -14,6 +14,7 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(registration_params)
     if @registration.register
+      UserMailer.welcome_email(@registration.user).deliver
       sign_in(@registration.user)
     end
 

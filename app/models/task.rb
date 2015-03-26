@@ -4,11 +4,19 @@ class Task < ActiveRecord::Base
   # which should recalculate the points for the user
   DIFFICULTY = [1,2,3,4,5]
 
-  has_many :followup_tasks, class_name: "Task", foreign_key: :prerequisite_id
   has_many :offers
   has_many :users, through: :offers
   belongs_to :category
-  belongs_to :prerequisite, class_name: "Task"
+
+
+  has_many :prerequisitables
+  has_many :prerequisites, through: :prerequisitables
+  has_many :postrequisites,
+    class_name: "Prerequisitable",
+    foreign_key: "prerequisite_id"
+  has_many :postrequistables, through: :postrequisites, source: :task
+
+  # requirable
 
   scope :with_category, proc { |category_id|
     if (category_id.present?)
