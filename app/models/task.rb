@@ -7,6 +7,8 @@ class Task < ActiveRecord::Base
   has_many :offers
   has_many :users, through: :offers
   belongs_to :category
+  belongs_to :company
+  belongs_to :user
 
 
   has_many :prerequisitables

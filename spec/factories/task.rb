@@ -1,5 +1,9 @@
 FactoryGirl.define do
   factory :task do
+    company
+    user
+    category
+
     sequence :title do |n|
       "Task Blah #{n}"
     end
@@ -13,7 +17,6 @@ FactoryGirl.define do
     fun_factor { rand((1..5)) }
 
     # company
-    # user
   end
 end
 

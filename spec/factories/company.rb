@@ -1,7 +1,5 @@
 FactoryGirl.define do
   factory :company do
-
-    sequence :id
     sequence :name do |n|
       "Example Company #{n}"
     end
@@ -16,13 +14,17 @@ FactoryGirl.define do
       end
     end
 
-    factory :company_with_tasks do
-      transient do
+    trait :with_tasks do
+      ignore do
         tasks_count 30
       end
 
       after(:create) do |company, evaluator|
-        create_list(:task, evaluator.tasks_count, company_id: company.id)
+        create_list(
+          :task,
+          evaluator.tasks_count,
+          company: company
+        )
       end
     end
 

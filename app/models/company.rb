@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
   has_many :bank_accounts
   has_many :categories
   has_many :credit_cards
+  has_many :invitations
   has_many :funding_instruments
   has_many :tasks
   has_many :users

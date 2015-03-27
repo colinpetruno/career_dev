@@ -43,6 +43,8 @@ gem "neat"
 gem "kaminari"
 gem "mandrill_mailer"
 
+gem "email_validator"
+
 group :development do 
   gem "byebug"
   gem "pry-byebug"

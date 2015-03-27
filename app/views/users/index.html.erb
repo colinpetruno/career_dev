@@ -18,3 +18,8 @@
     </tr>
   <% end %>
 </table>
+
+<%= link_to "Invite Your Team Members",
+  new_company_invitation_token_path(current_company),
+  class: "button"
+%>

@@ -1,0 +1,6 @@
+<%= form_for [current_company, @invitation] do |f| %>
+  <%= f.label :emails %>
+  <%= f.text_area :emails %>
+  <p>Enter emails seperated by commas</p>
+  <%= f.submit class: "button" %>
+<% end %>

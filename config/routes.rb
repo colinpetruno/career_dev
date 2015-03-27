@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :credit_cards, only: [:new, :create]
     resources :users, only: [:index, :edit, :update], path: "employees"
     resources :funding_instruments, only: [:index], path: "payment-methods"
+    resources :invitations, only: [:new, :create], path: "invitations"
     resources :settings, only: [:index]
     resources :subscriptions, only: [:update]
     resources :tasks do

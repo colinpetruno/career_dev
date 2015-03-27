@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :subscription do
+
     association :billing_plan, strategy: :create
     frequency "monthly"
     active true
