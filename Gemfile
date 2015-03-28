@@ -6,6 +6,7 @@ gem "rails", "~> 4.2.0"
 # Bundle edge Rails instead:
 # gem "rails", :git => "git://github.com/rails/rails.git"
 gem "devise"
+gem "devise_invitable", "~> 1.3.4"
 gem "omniauth"
 gem "omniauth-google-oauth2" 
 gem "pg"

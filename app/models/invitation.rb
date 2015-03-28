@@ -7,6 +7,7 @@ class Invitation < ActiveRecord::Base
 
   validate :all_emails_valid
 
+  # TODO: Ensure email is not sent to the person inviting
   private
 
   def all_emails_valid
@@ -19,7 +20,7 @@ class Invitation < ActiveRecord::Base
 
   def create_tokens
     self.emails.split(",").each do |email|
-
+      self.invitation_tokens.build(email: email)
     end
   end
 end

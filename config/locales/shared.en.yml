@@ -1,5 +1,15 @@
 en:
   shared:
+    logged_in_nav:
+      tasks: "Tasks"
+      settings: "Company Settings"
+      your_settings: "Settings"
+    logged_out_nav:
+      features: "Features"
+      company: "Company"
+      pricing: "Pricing"
+      sign_up: "Sign Up"
+      log_in: "Log In"
     header:
       features: "Features"
       company: "Company"

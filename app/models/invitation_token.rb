@@ -1,12 +1,11 @@
 class InvitationToken < ActiveRecord::Base
   belongs_to :invitation
 
-  before_create :create_token
+  after_create :queue_invitation
 
   private
 
-  def create_token
-    self.token = SecureRandom.urlsafe_base64
+  def queue_invitation
+    Resque.enqueue(InvitationEmail, self.id)
   end
-
 end

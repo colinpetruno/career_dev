@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
 
   # TODO: Restrict access for site admins
+  ResqueWeb::Engine.eager_load!
   mount ResqueWeb::Engine => "/resque_web"
 
 end
