@@ -3,61 +3,47 @@ ruby "2.1.5"
 
 gem "rails", "~> 4.2.0"
 
-# Bundle edge Rails instead:
-# gem "rails", :git => "git://github.com/rails/rails.git"
+gem "activerecord-session_store"
+gem "bitters"
+gem "bourbon"
+gem "cancancan"
+gem "coffee-rails"
 gem "devise"
 gem "devise_invitable", "~> 1.3.4"
+gem "dotenv-rails"
+gem "email_validator"
+gem "faraday", "~> 0.8.6"
+gem "font-awesome-sass", "~> 4.3.0"
+gem "foreman"
+gem "high_voltage"
+gem "jquery-rails"
+gem "kaminari"
+gem "mandrill_mailer"
+gem "neat"
 gem "omniauth"
 gem "omniauth-google-oauth2" 
 gem "pg"
-gem "activerecord-session_store"
-gem "high_voltage"
-gem "cancancan"
-gem "dotenv-rails"
-
-# Payments
-gem "balanced"
-gem "stripe"
-
-gem "faraday", "~> 0.8.6"
-
+gem "redis"
 gem "resque", branch: "1-x-stable", github: "resque/resque"
 gem "resque-web", require: "resque_web"
-gem "redis"
-gem "foreman"
-
-# Gems used only for assets and not required
-# in production environments by default.
 gem "sass-rails"
-gem "coffee-rails"
-gem "font-awesome-sass", "~> 4.3.0"
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem "therubyracer", :platforms => :ruby
-
+gem "simple_form"
+gem "stripe"
 gem "uglifier"
 
-gem "bitters"
-gem "bourbon"
-gem "neat"
-
-gem "kaminari"
-gem "mandrill_mailer"
-
-gem "email_validator"
-
 group :development do 
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "byebug"
   gem "pry-byebug"
-  gem "better_errors"
 end
 
 group :development, :test do
-  gem "faker"
   gem "database_cleaner"
+  gem "factory_girl_rails"
+  gem "faker"
   gem "guard-rails"
   gem "guard-rspec"
-  gem "factory_girl_rails"
   gem "rspec-rails", "~> 3.0"
   gem "shoulda-matchers"
   gem "spring"
@@ -65,5 +51,4 @@ group :development, :test do
   gem "vcr"
 end
 
-gem "jquery-rails"
 

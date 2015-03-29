@@ -68,7 +68,7 @@ class TasksController < AuthenticatedController
     @task = Task.find(params[:id])
 
     respond_to do |format|
-      if @task.update_attributes(params[:task])
+      if @task.update_attributes(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
@@ -81,9 +81,11 @@ class TasksController < AuthenticatedController
   private
 
   def task_params
+    # "task"=>{"title"=>"Engineering task 4", "description"=>"Test Prerequisites", "difficulty"=>"3", "fun_factor"=>"3", "size"=>"3", "category_id"=>"86", "prerequisite_ids"=>["", "112"]},
     params.
       require(:task).
-      permit(:category_id, :description, :difficulty, :fun_factor, :size, :title, :company_id, :user_id).
+      permit(:category_id, :description, :difficulty, :fun_factor,
+             :size, :title, :company_id, :user_id, :prerequisite_ids => []).
       merge(user_id: current_user.id, company_id: current_user.company_id)
   end
 

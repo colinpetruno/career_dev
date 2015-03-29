@@ -10,23 +10,19 @@ class Task < ActiveRecord::Base
   belongs_to :company
   belongs_to :user
 
-
   has_many :prerequisitables
   has_many :prerequisites, through: :prerequisitables
+
   has_many :postrequisites,
     class_name: "Prerequisitable",
     foreign_key: "prerequisite_id"
   has_many :postrequistables, through: :postrequisites, source: :task
-
-  # requirable
 
   scope :with_category, proc { |category_id|
     if (category_id.present?)
       where(category_id: category_id)
     end
   }
-
-
 
   def self.for(user)
     where(company_id: user.company_id)

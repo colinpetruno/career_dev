@@ -5,7 +5,9 @@
         <h1>Tasks</h1>
       </div>
       <div class="text-right">
-        <%= link_to "New Task", new_company_task_path(current_company), class: "button" %>
+        <% if can? :create, Task %>
+          <%= link_to "New Task", new_company_task_path(current_company), class: "button" %>
+        <% end %>
       </div>
     </div>
 

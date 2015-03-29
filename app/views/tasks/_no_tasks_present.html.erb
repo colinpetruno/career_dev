@@ -3,6 +3,13 @@
     <%= icon "list" %>
   </div>
 
-  <h3>Get Started Creating Tasks</h3>
-  <div class="seperator"></div>
+  <% if can? :create, Task %>
+    <h3>Get Started Creating Tasks</h3>
+    <div class="seperator"></div>
+    <br>
+    <%= link_to "Create a Task", new_company_task_path(current_company), class: "button" %>
+  <% else %>
+    <h3>Your company hasn't created any tasks yet! Check back soon</h3>
+    <%# TODO: Create an email to company managers to add tasks %>
+  <% end %>
 </div>
