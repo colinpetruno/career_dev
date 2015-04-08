@@ -11,6 +11,7 @@ gem "coffee-rails"
 gem "devise"
 gem "devise_invitable", "~> 1.3.4"
 gem "dotenv-rails"
+gem "draper"
 gem "email_validator"
 gem "faraday", "~> 0.8.6"
 gem "font-awesome-sass", "~> 4.3.0"
@@ -33,12 +34,12 @@ gem "uglifier"
 
 group :development do 
   gem "better_errors"
-  gem "binding_of_caller"
-  gem "byebug"
-  gem "pry-byebug"
 end
 
 group :development, :test do
+  gem "binding_of_caller"
+  gem "byebug"
+  gem "pry-byebug"
   gem "capybara"
   gem "database_cleaner"
   gem "factory_girl_rails"

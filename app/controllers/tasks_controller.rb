@@ -3,11 +3,15 @@ class TasksController < AuthenticatedController
   # GET /tasks
   # GET /tasks.json
   def index
+    # c.tasks.includes(:prerequisites).select { |t| t.prerequisites.blank? }
+    #  City.includes(:photos).where(photos: { city_id: nil })
     @tasks = current_company.
       tasks.
       with_category(params[:category] || nil).
       includes(:category).
-      page(params[:page])
+      page(params[:page]).decorate
+
+    # @tasks = TaskDecorator.decorate_collection(tasks)
 
     @categories = current_company.categories.includes(:tasks)
 

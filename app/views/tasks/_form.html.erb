@@ -1,44 +1,53 @@
 <%= simple_form_for [current_user.company, @task] do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+  <div class="two-column-row">
+    <div>
+      <% if @task.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@task.errors.count, "error") %>
+            prohibited this task from being saved:
+          </h2>
+          <ul>
+            <% @task.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+      <div class="field">
+        <%= f.input :title %>
+      </div>
+      <div class="field">
+        <%= f.input :description %>
+      </div>
+      <div class="field">
+        <%= f.input :difficulty, collection: (1..5), selected: 3  %>
+      </div>
+      <div class="field">
+        <%= f.input :fun_factor, collection: (1..5), selected: 3 %>
+      </div>
+      <div class="field">
+        <%= f.input :size, collection: (1..5), selected: 3 %>
+      </div>
+      <div class="field">
+        <%= f.input :category_id,
+          collection: current_company.categories
+        %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.input :title %>
   </div>
-  <div class="field">
-    <%= f.input :description %>
+  <div>
+    <div class="field">
+      <%= f.association :prerequisites,
+        collection: Task.for(current_user),
+        as: :check_boxes
+      %>
   </div>
-  <div class="field">
-    <%= f.input :difficulty, collection: (1..5), selected: 3  %>
-  </div>
-  <div class="field">
-    <%= f.input :fun_factor, collection: (1..5), selected: 3 %>
-  </div>
-  <div class="field">
-    <%= f.input :size, collection: (1..5), selected: 3 %>
-  </div>
-  <div class="field">
-    <%= f.input :category_id,
-      collection: current_company.categories
-    %>
-  </div>
-  <div class="field">
-    <%= f.association :prerequisites,
-      collection: Task.for(current_user),
-      as: :select
-    %>
-  </div>
+</div>
+</div>
 
-  <div class="actions">
-    <%= f.button :submit %>
-  </div>
+<div class="actions">
+  <%= f.button :submit %>
+</div>
 <% end %>

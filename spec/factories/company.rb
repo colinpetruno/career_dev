@@ -1,11 +1,6 @@
 FactoryGirl.define do
   factory :company do
-    sequence :name do |n|
-      "Example Company #{n}"
-    end
-    sequence :slug do |n|
-      "example-company-#{n}"
-    end
+    name { Faker::Company.name }
 
     after(:build) do |company|
       unless company.subscription
@@ -15,7 +10,7 @@ FactoryGirl.define do
     end
 
     trait :with_tasks do
-      ignore do
+      transient do
         tasks_count 30
       end
 

@@ -25,7 +25,13 @@ class Task < ActiveRecord::Base
   }
 
   def self.for(user)
-    where(company_id: user.company_id)
+    # first select all tasks that match
+    #
+    # then remove
+    where(company_id: user.company_id).
+      includes(:prerequisites).
+      includes(:prerequisitables).
+      where(prerequisitables: { task_id: nil })
   end
 
   def self.from(user)
@@ -54,6 +60,10 @@ class Task < ActiveRecord::Base
 
   def points
     (((difficulty + size) * normalized_fun_factor) * 10).to_i
+  end
+
+  def completable_for?(user)
+    self.prerequisites.blank?
   end
 
 
