@@ -1,4 +1,6 @@
 require 'devise'
+# require 'capybara/rails'
+
 require File.expand_path("../../config/environment", __FILE__)
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each do |file|
