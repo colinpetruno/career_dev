@@ -48,17 +48,9 @@
         <%= @task.category.name %>
         </p>
 
+        <%= @task.interest %>
 
-        <% if @task.has_expressed_interest?(current_user) %>
-          <p class="text-success">You have already expressed interest in this task</p>
-          <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
-        <% else %>
-          <%= form_for [current_user.company, @task, @task.offers.build] do |f| %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.submit "Express Interest", class: "btn btn-info" %>
-            <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
-          <% end %>
-        <% end %>
+         <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
       </div>
 
       <div>

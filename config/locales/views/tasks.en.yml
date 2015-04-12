@@ -1,0 +1,5 @@
+en:
+  tasks:
+    offers:
+      expressed_interest:
+        message: "Thanks for expressing interest in this task"

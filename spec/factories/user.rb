@@ -6,5 +6,13 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password "asdf1234"
     password_confirmation "asdf1234"
+
+    trait :is_company_admin do
+      role "Company Admin"
+    end
+
+    factory :company_admin, traits: [:is_company_admin]
   end
+
+
 end

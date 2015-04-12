@@ -1,12 +1,12 @@
 <div>
   <h3>Interested Users</h3>
-  <% if @task.unaccepted_offers.present? %>
+  <% if @task.offers.not_accepted.present? %>
     <table class="table">
-      <% @task.unaccepted_offers.each do |user| %>
+      <% @task.offers.not_accepted.each do |user| %>
         <tr>
           <th><%= "#{user.first_name} #{user.last_name}" %></th>
           <th>
-            <%= form_for [@task, @task.offer_for(current_user)] do |f| %>
+            <%= form_for [@task, @task.offer_for(user)] do |f| %>
               <%= f.hidden_field :accepted, value: true %>
               <%= f.submit "Accept", class: "btn btn-success" %>
             <% end %>
@@ -20,13 +20,13 @@
   <% end %>
 
   <h3>Accepted Users</h3>
-  <% if @task.accepted_offers.present? %>
+  <% if @task.offers.accepted.present? %>
     <table class="table">
-      <% @task.accepted_offers.each do |user| %>
+      <% @task.offers.accepted.each do |user| %>
         <tr>
-          <th><%= user.name %></th>
+          <th><%= "#{user.first_name} #{user.last_name}" %></th>
           <th>
-            <%= form_for [:admin, @task, @task.offer_for(current_user)] do |f| %>
+            <%= form_for [@task, @task.offer_for(user)] do |f| %>
               <%= f.hidden_field :approved, value: true %>
               <%= f.submit "Approve", class: "btn btn-success" %>
             <% end %>
@@ -39,13 +39,15 @@
   <% end %>
 
   <h3>Approved</h3>
-  <% if @task.approved_offers.present? %>
+  <% if @task.offers.approved.present? %>
     <table class="table">
-      <% @task.approved_offers.each do |user| %>
+      <% @task.offers.approved.each do |user| %>
         <tr>
-          <th><%= user.name %></th>
+          <th><%= "#{user.first_name} #{user.last_name}" %></th>
           <th>
-            <p class="text-success">Approved on <%= @task.offer_for(current_user).created_at %></p>
+            <p class="text-success">
+              Approved on <%= @task.offer_for(user).created_at %>
+            </p>
           </th>
         </tr>
       <% end %>

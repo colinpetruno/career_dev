@@ -25,13 +25,9 @@ class Task < ActiveRecord::Base
   }
 
   def self.for(user)
-    # first select all tasks that match
-    #
-    # then remove
     where(company_id: user.company_id).
       includes(:prerequisites).
-      includes(:prerequisitables).
-      where(prerequisitables: { task_id: nil })
+      includes(:prerequisitables)
   end
 
   def self.from(user)
@@ -58,30 +54,25 @@ class Task < ActiveRecord::Base
     offers.where(user_id: user.id).first
   end
 
+
+
   def points
     (((difficulty + size) * normalized_fun_factor) * 10).to_i
   end
 
   def completable_for?(user)
-    self.prerequisites.blank?
+    # TODO: TEST ME
+    self.prerequisites.blank? || completed_prerequisites?(user)
   end
 
+  private
 
-  #might not need these
-  def approved_offers
-    users.merge(Offer.approved)
+  def completed_prerequisites?(user)
+    (prerequisites.map(&:id) - user.offers.approved.pluck(:task_id)).empty?
   end
 
-  def unaccepted_offers
-    users.merge(Offer.not_accepted)
-  end
-
-  def accepted_offers
-    users.merge(Offer.accepted)
-  end
-
-  def completed_offers
-    users.merge(Offer.completed)
+  def inverse_fun_factor
+    DIFFICULTY.reverse[fun_factor - 1]
   end
 
   def normalized_fun_factor
@@ -89,9 +80,4 @@ class Task < ActiveRecord::Base
     new_range = 1.to_f
     (((inverse_fun_factor.to_f - DIFFICULTY.first.to_f) * new_range) / old_range) + 1
   end
-
-  def inverse_fun_factor
-    DIFFICULTY.reverse[fun_factor - 1]
-  end
-
 end

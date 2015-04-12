@@ -1,39 +1,36 @@
 class TasksController < AuthenticatedController
   load_and_authorize_resource except: [:index, :show]
-  # GET /tasks
-  # GET /tasks.json
+
   def index
-    # c.tasks.includes(:prerequisites).select { |t| t.prerequisites.blank? }
-    #  City.includes(:photos).where(photos: { city_id: nil })
     @tasks = current_company.
       tasks.
       with_category(params[:category] || nil).
       includes(:category).
       page(params[:page]).decorate
 
-    # @tasks = TaskDecorator.decorate_collection(tasks)
-
     @categories = current_company.categories.includes(:tasks)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.js
       format.json { render json: @tasks }
     end
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
-    @task = Task.for(current_user).find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @task }
+
+    @task = current_company.tasks.find(params[:id]).decorate
+
+    if can?(:manage, Task) || @task.completable_for?(current_user)
+      respond_to do |format|
+        format.html
+        format.json { render json: @task }
+      end
+    else
+      raise CanCan::AccessDenied.new("Not authorized!", :read, Task)
     end
   end
 
-  # GET /tasks/new
-  # GET /tasks/new.json
   def new
     @tasks = current_company.
       tasks.

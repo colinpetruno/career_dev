@@ -1,7 +1,10 @@
 class OffersController < ApplicationController
+
   def create
     task = Task.find(params[:task_id])
+
     @offer = task.offers.build.for_user(current_user)
+
     if @offer.save
       redirect_to company_task_path(current_user.company, task), flash: { success: "Interest Expressed" }
     else
@@ -10,7 +13,9 @@ class OffersController < ApplicationController
   end
 
   def update
+    task = Task.find(params[:task_id])
     offer = Offer.find(params[:id])
+
     if offer.update(offers_params)
       redirect_to company_task_path(current_user.company, task), flash: { success: "Success" }
     else
@@ -21,6 +26,6 @@ class OffersController < ApplicationController
   private
 
   def offers_params
-    params.require(:offer).permit(:completed)
+    params.require(:offer).permit(:accepted, :approved, :completed)
   end
 end

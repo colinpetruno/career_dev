@@ -27,10 +27,18 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:deletion)
   end
 
+  config.before(:each) do
+    DatabaseCleaner.clean
+  end
+
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+
+  config.after(:suite) do
+    DatabaseCleaner.clean_with(:deletion)
   end
 
 end
