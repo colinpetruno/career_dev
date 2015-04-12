@@ -4,6 +4,7 @@ en:
       tasks: "Tasks"
       settings: "Company Settings"
       your_settings: "Settings"
+      your_tasks: "Your Tasks"
     logged_out_nav:
       features: "Features"
       company: "Company"

@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     resource :billing_plan, path: "billing"
     resources :categories
     resources :credit_cards, only: [:new, :create]
-    resources :users, only: [:index, :edit, :update], path: "employees"
+    resources :users, only: [:index, :edit, :update], path: "employees" do
+      resources :tasks, only: [:index], controller: 'users/tasks'
+    end
     resources :funding_instruments, only: [:index], path: "payment-methods"
     resources :invitations, only: [:new, :create], path: "invitations"
     resources :settings, only: [:index]

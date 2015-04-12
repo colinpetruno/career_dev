@@ -1,13 +1,18 @@
 <ul id="js-navigation-menu" class="navigation-menu show">
   <li class="nav-link">
-    <%= link_to t(".tasks"), company_tasks_path(current_user.company) %>
+    <%= link_to t(".tasks"), company_tasks_path(current_company) %>
+  </li>
+  <li class="nav-link">
+    <%= link_to t(".your_tasks"),
+      company_user_tasks_path(current_company, current_user)
+    %>
   </li>
   <li class="nav-link">
     <%= link_to t(".your_settings"), page_path("about") %>
   </li>
-  <% if current_user.is? :company_admin %>
+  <% if can?(:mange, Company) %>
     <li class="nav-link">
-      <%= link_to "Company Settings", edit_company_path(current_user.company) %>
+      <%= link_to "Company Settings", edit_company_path(current_company) %>
     </li>
   <% end %>
   <li class="nav-link">
