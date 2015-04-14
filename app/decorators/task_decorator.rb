@@ -10,10 +10,23 @@ class TaskDecorator < Draper::Decorator
   end
 
   def interest
-    if object.has_expressed_interest?(h.current_user)
-      h.render partial: "tasks/offers/expressed_interest"
-    else
+    if !object.has_expressed_interest?(h.current_user)
       h.render partial: "offers/form", locals: { task: object }
+    end
+  end
+
+  def status
+    case
+    when object.approved?(h.current_user)
+      "approved"
+    when object.completed?(h.current_user)
+      "completed"
+    when object.accepted?(h.current_user)
+      "accepted"
+    when object.has_expressed_interest?(h.current_user)
+      "expressed_interest"
+    else
+      "express_interest"
     end
   end
 

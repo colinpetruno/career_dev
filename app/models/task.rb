@@ -18,6 +18,8 @@ class Task < ActiveRecord::Base
     foreign_key: "prerequisite_id"
   has_many :postrequistables, through: :postrequisites, source: :task
 
+  after_create :create_notification_emails
+
   scope :with_category, proc { |category_id|
     if (category_id.present?)
       where(category_id: category_id)
@@ -69,6 +71,10 @@ class Task < ActiveRecord::Base
 
   def completed_prerequisites?(user)
     (prerequisites.map(&:id) - user.offers.approved.pluck(:task_id)).empty?
+  end
+
+  def create_notification_emails
+    Resque.enqueue(TaskNotifier, self.id)
   end
 
   def inverse_fun_factor

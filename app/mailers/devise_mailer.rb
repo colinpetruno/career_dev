@@ -1,7 +1,5 @@
 class DeviseMailer < MandrillMailer::TemplateMailer
-  include
-
-  default from: 'support@treeha.us'
+  default from: "support@treeha.us"
 
   def invitation_instructions(record, token, opts={})
     # record is a user object

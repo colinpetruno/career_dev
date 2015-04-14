@@ -2,11 +2,11 @@
   <h3>Interested Users</h3>
   <% if @task.offers.not_accepted.present? %>
     <table class="table">
-      <% @task.offers.not_accepted.each do |user| %>
+      <% @task.offers.not_accepted.each do |offer| %>
         <tr>
-          <th><%= "#{user.first_name} #{user.last_name}" %></th>
+          <th><%= "#{offer.user.first_name} #{offer.user.last_name}" %></th>
           <th>
-            <%= form_for [@task, @task.offer_for(user)] do |f| %>
+            <%= form_for [@task, @task.offer_for(offer.user)] do |f| %>
               <%= f.hidden_field :accepted, value: true %>
               <%= f.submit "Accept", class: "btn btn-success" %>
             <% end %>
@@ -22,11 +22,11 @@
   <h3>Accepted Users</h3>
   <% if @task.offers.accepted.present? %>
     <table class="table">
-      <% @task.offers.accepted.each do |user| %>
+      <% @task.offers.accepted.each do |offer| %>
         <tr>
-          <th><%= "#{user.first_name} #{user.last_name}" %></th>
+          <th><%= "#{offer.user.first_name} #{offer.user.last_name}" %></th>
           <th>
-            <%= form_for [@task, @task.offer_for(user)] do |f| %>
+            <%= form_for [@task, @task.offer_for(offer.user)] do |f| %>
               <%= f.hidden_field :approved, value: true %>
               <%= f.submit "Approve", class: "btn btn-success" %>
             <% end %>
@@ -41,12 +41,12 @@
   <h3>Approved</h3>
   <% if @task.offers.approved.present? %>
     <table class="table">
-      <% @task.offers.approved.each do |user| %>
+      <% @task.offers.approved.each do |offer| %>
         <tr>
-          <th><%= "#{user.first_name} #{user.last_name}" %></th>
+          <th><%= "#{offer.user.first_name} #{offer.user.last_name}" %></th>
           <th>
             <p class="text-success">
-              Approved on <%= @task.offer_for(user).created_at %>
+              Approved on <%= @task.offer_for(offer.user).created_at %>
             </p>
           </th>
         </tr>

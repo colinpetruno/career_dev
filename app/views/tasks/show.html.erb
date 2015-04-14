@@ -15,8 +15,6 @@
     </div>
     <div class="two-column-row">
       <div>
-
-
         <p id="notice"><%= notice %></p>
         <p>
         <b>Title:</b>
@@ -50,7 +48,10 @@
 
         <%= @task.interest %>
 
-         <%= link_to 'Back', company_tasks_path(current_user.company), class: "btn btn-default" %>
+        <%= link_to 'Back',
+          company_tasks_path(current_user.company),
+          class: "btn btn-default"
+        %>
       </div>
 
       <div>
@@ -59,17 +60,7 @@
           <%= render partial: "manage_sidebar" %>
         <% end %>
 
-        <% if @task.accepted?(current_user) %>
-          <% if @task.offer_for(current_user).approved? %>
-            <%= render partial: "/tasks/offers/approved" %>
-          <% elsif @task.completed?(current_user) %>
-            <%= render partial: "/tasks/offers/completed" %>
-          <% else %>
-            <%= render partial: "/tasks/offers/accepted" %>
-          <% end %>
-        <% elsif @task.approved?(current_user) %>
-          This is approved task
-        <% end %>
+        <%= render partial: "/tasks/offers/#{@task.status}" %>
       </div>
     </div>
   </div>
