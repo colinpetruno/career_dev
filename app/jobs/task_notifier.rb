@@ -5,7 +5,7 @@ class TaskNotifier
     task = Task.find(task_id)
 
     task.company.users.each do |user|
-      Resque.enqueue(TaskNotification, task_id, user_id)
+      Resque.enqueue(TaskNotification, task_id, user.id)
     end
   end
 end
