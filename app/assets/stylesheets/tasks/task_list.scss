@@ -1,0 +1,49 @@
+.task-list {
+  li {
+    display: block;
+  }
+}
+
+.task-row {
+  background-color: #eee;
+  margin-bottom: 10px;
+  cursor: default;
+
+  section {
+    padding: 10px;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+    border-top: 1px solid #aaa;
+
+    @include outer-container;
+    &>div:first-child {
+      @include span-columns(11);
+    }
+    &>div:last-child {
+      text-align: center; 
+      font-size: $large-font-size;
+      @include span-columns(1);
+    }
+
+    .title {
+      font-size: $large-font-size; 
+    }
+
+    .description {
+
+    }
+  }
+
+  footer {
+    border: 1px solid #aaa;
+    @include outer-container;
+    >div {
+      padding: 10px;
+      @include span-columns(3);
+      i {
+        color: #f9cf34;
+        padding: 0 5px;
+      }
+    }
+  }
+}

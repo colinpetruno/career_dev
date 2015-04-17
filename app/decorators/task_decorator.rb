@@ -1,17 +1,18 @@
 class TaskDecorator < Draper::Decorator
   delegate_all
 
+  STEPS = {
+    expressed_interest: "",
+    accepted: "",
+    completed: "",
+    approved: ""
+  }
+
   def task_link
     if can_complete_task?
       h.link_to(task.title, h.company_task_path(h.current_user.company, task))
     else
       task.title
-    end
-  end
-
-  def interest
-    if !object.has_expressed_interest?(h.current_user)
-      h.render partial: "offers/form", locals: { task: object }
     end
   end
 
@@ -26,7 +27,17 @@ class TaskDecorator < Draper::Decorator
     when object.has_expressed_interest?(h.current_user)
       "expressed_interest"
     else
-      "express_interest"
+      nil
+    end
+  end
+
+  def next_step_button
+    # TODO: figure out a better way, this is confusing because the button
+    # is the button for that status not for that method
+    if status
+      h.render partial: "/tasks/offers/#{status}_button"
+    else
+      h.render partial: "offers/form", locals: { task: object }
     end
   end
 

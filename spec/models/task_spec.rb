@@ -8,11 +8,6 @@ describe Task do
       @company = create(:company)
       @user = create(:user, company: @company)
 
-      # need to stub this so it doesnt call resque on creating the company
-      allow_any_instance_of(Subscription).
-        to receive(:queue_update_plan).
-        and_return(true)
-
       expect(Resque).
         to receive(:enqueue).
         with(TaskNotifier, kind_of(Numeric))

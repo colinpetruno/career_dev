@@ -11,6 +11,7 @@ class Company < ActiveRecord::Base
   has_many :credit_cards
   has_many :invitations
   has_many :funding_instruments
+  has_many :offers, through: :tasks
   has_many :tasks
   has_many :users
   has_one :subscription

@@ -10,7 +10,19 @@
         <% end %>
       </div>
     </div>
-
+    <div class="category-select">
+      <div>
+        <%=
+          select_tag(
+            :category_select,
+            options_from_collection_for_select(
+              current_company.categories, :id, :name, params[:category]
+            ),
+            include_blank: true
+          )
+        %>
+      </div>
+    </div>
     <% if @tasks.present? %>
       <%= render partial: "tasks" %>
     <% else %>

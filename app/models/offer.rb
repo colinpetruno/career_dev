@@ -2,6 +2,8 @@ class Offer < ActiveRecord::Base
   belongs_to :user
   belongs_to :task
 
+  has_one :submission
+
   scope :accepted, -> { where(accepted: true).where(approved: false) }
   scope :approved, -> { where(approved: true) }
   scope :completed, -> { where(completed: true) }

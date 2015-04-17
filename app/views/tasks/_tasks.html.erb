@@ -1,34 +1,5 @@
-<%=
-  select_tag(
-    :category_select,
-    options_from_collection_for_select(
-      current_company.categories, :id, :name, params[:category]
-    ),
-    include_blank: true
-  )
-%>
-
-<table class="table">
-  <tr>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Fun Factor</th>
-    <th>Difficulty</th>
-    <th>Size</th>
-    <th>Points</th>
-  </tr>
-
-  <% @tasks.each do |task| %>
-    <%# tasks that have uncompleted prerequisites should be grayed out %>
-      <tr>
-        <td><%= task.task_link %></td>
-        <td><%= task.category.name %></td>
-        <td><%= task.fun_factor %></td>
-        <td><%= task.difficulty %></td>
-        <td><%= task.size %></td>
-        <td><%= task.points %></td>
-      </tr>
-  <% end %>
-</table>
+<ul class="task-list">
+  <%= render(@tasks) %>
+</ul>
 
 <%= paginate @tasks, params: { category: params[:category] } %>

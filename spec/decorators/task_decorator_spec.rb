@@ -41,20 +41,20 @@ describe TaskDecorator do
     end
   end
 
-  describe "#interest" do
-    it "should render a form if it hasn't been accepted" do
-      sign_in(user)
-      expect(prerequisite.interest).to include("<form")
-    end
+  #describe "#interest" do
+    #it "should render a form if it hasn't been accepted" do
+      #sign_in(user)
+      #expect(prerequisite.interest).to include("<form")
+    #end
 
-    it "should render text if it has been accepted" do
-      sign_in(user)
-      create(:offer, user: user, task: prerequisite)
+    #it "should render text if it has been accepted" do
+      #sign_in(user)
+      #create(:offer, user: user, task: prerequisite)
 
-      expect(prerequisite.interest).
-        to include(I18n.t("tasks.offers.expressed_interest.message"))
-    end
-  end
+      #expect(prerequisite.interest).
+        #to include(I18n.t("tasks.offers.expressed_interest.message"))
+    #end
+  #end
 
   def build_task_with_prerequisites
 

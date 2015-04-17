@@ -1,14 +1,15 @@
 class Task < ActiveRecord::Base
   paginates_per 15
-  # i left off needing to be able to approve an offer an admin
-  # which should recalculate the points for the user
+
   DIFFICULTY = [1,2,3,4,5]
 
-  has_many :offers
-  has_many :users, through: :offers
   belongs_to :category
   belongs_to :company
   belongs_to :user
+
+  has_many :email_records, as: :emailable
+  has_many :offers
+  has_many :users, through: :offers
 
   has_many :prerequisitables
   has_many :prerequisites, through: :prerequisitables
@@ -17,6 +18,8 @@ class Task < ActiveRecord::Base
     class_name: "Prerequisitable",
     foreign_key: "prerequisite_id"
   has_many :postrequistables, through: :postrequisites, source: :task
+
+  has_many :submissions, through: :offers
 
   after_create :create_notification_emails
 

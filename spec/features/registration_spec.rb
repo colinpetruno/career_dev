@@ -1,7 +1,11 @@
 require "rails_helper"
 
 feature "A visitor signs up to the site" do
+  before { StripeMock.start }
+
   scenario "by selecting a plan from the homepage" do
+    create(:billing_plan)
+
     visit root_path
     first(:link, "Get Started").click
 

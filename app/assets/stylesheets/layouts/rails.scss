@@ -1,0 +1,21 @@
+.left-rail {
+  @include outer-container;
+  >div:first-child {
+    @include span-columns(2);
+  }
+  >div:last-child {
+    @include span-columns(10);
+    @include omega;
+  }
+}
+
+.right-rail {
+  @include outer-container;
+  >div:first-child {
+    @include span-columns(10);
+  }
+  >div:last-child {
+    @include span-columns(2);
+    @include omega;
+  }
+}

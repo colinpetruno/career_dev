@@ -7,62 +7,75 @@
       <div class="text-right">
         <% if can? :manage, @task %>
           <%= link_to "Edit Task",
-              edit_company_task_path(current_user.company, @task),
-              class: "button"
-          %>
+            edit_company_task_path(current_user.company, @task),
+            class: "button" %>
         <% end %>
       </div>
     </div>
+  </div>
+
+
+
+  <div>
+    <div class="task-status">
+      <%= render partial: "/tasks/offers/#{@task.status}" if @task.status %>
+    </div>
+  </div>
+
+  <div class="right-rail">
+    <div>
+      <%= @task.description %>
+    </div>
+
+    <div class="task-info">
+      <div>
+        <%= @task.points %><br>
+        Pts
+      </div>
+      <div>
+        <b>Difficulty:</b><br>
+        <%= rating_for(@task.difficulty) %>
+      </div>
+
+      <div>
+        <b>Fun factor:</b><br>
+        <%= rating_for(@task.fun_factor) %>
+      </div>
+
+      <div>
+        <b>Size:</b><br>
+        <%= rating_for(@task.size) %>
+      </div>
+
+      <div>
+        <b>Category:</b><br>
+        <%= @task.category.name %>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div>
     <div class="two-column-row">
       <div>
-        <p id="notice"><%= notice %></p>
-        <p>
-        <b>Title:</b>
-        <%= @task.title %>
-        </p>
-
-        <p>
-        <b>Description:</b>
-        <%= @task.description %>
-        </p>
-
-        <p>
-        <b>Difficulty:</b>
-        <%= @task.difficulty %>
-        </p>
-
-        <p>
-        <b>Fun factor:</b>
-        <%= @task.fun_factor %>
-        </p>
-
-        <p>
-        <b>Size:</b>
-        <%= @task.size %>
-        </p>
-
-        <p>
-        <b>Category:</b>
-        <%= @task.category.name %>
-        </p>
-
-        <%= @task.interest %>
-
+        <%= @task.next_step_button %>
         <%= link_to 'Back',
           company_tasks_path(current_user.company),
           class: "btn btn-default"
         %>
       </div>
 
-      <div>
-
-        <% if can? :manage, @task %>
-          <%= render partial: "manage_sidebar" %>
-        <% end %>
-
-        <%= render partial: "/tasks/offers/#{@task.status}" %>
+      <div class="text-right">
       </div>
     </div>
   </div>
+
+  <br><br>
+
+  <% if can? :manage, @task %>
+    <%= render partial: "manage_sidebar" %>
+  <% end %>
+
 </section>
 

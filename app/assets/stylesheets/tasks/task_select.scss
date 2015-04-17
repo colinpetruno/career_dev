@@ -1,0 +1,7 @@
+.category-select {
+  @include outer-container;
+
+  &>div {
+    @include span-columns(3);
+  }
+}

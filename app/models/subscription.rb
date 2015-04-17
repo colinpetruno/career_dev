@@ -11,6 +11,8 @@ class Subscription < ActiveRecord::Base
   private
 
   def queue_update_plan
-    Resque.enqueue(UpdateSubscription, self.id)
+    if !Rails.env.test?
+      Resque.enqueue(UpdateSubscription, self.id)
+    end
   end
 end

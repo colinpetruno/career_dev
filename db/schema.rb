@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322132054) do
+ActiveRecord::Schema.define(version: 20150414121042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,18 @@ ActiveRecord::Schema.define(version: 20150322132054) do
   add_index "companies", ["domain"], name: "index_companies_on_domain", unique: true, using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", unique: true, using: :btree
 
+  create_table "email_records", force: :cascade do |t|
+    t.integer  "user_id",        null: false
+    t.integer  "emailable_id"
+    t.string   "emailable_type"
+    t.string   "mailer_class",   null: false
+    t.string   "mailer_method",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "email_records", ["emailable_id"], name: "index_email_records_on_emailable_id", using: :btree
+
   create_table "funding_instruments", force: :cascade do |t|
     t.string   "token"
     t.integer  "company_id"
@@ -62,6 +74,20 @@ ActiveRecord::Schema.define(version: 20150322132054) do
     t.string   "expiration_year"
     t.boolean  "primary",          default: false, null: false
     t.string   "stripe_id",                        null: false
+  end
+
+  create_table "invitation_tokens", force: :cascade do |t|
+    t.string   "email",         null: false
+    t.integer  "invitation_id"
+    t.datetime "accepted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "user_id"
+    t.string  "emails"
   end
 
   create_table "offers", force: :cascade do |t|
@@ -113,9 +139,9 @@ ActiveRecord::Schema.define(version: 20150322132054) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title",                       null: false
-    t.integer  "difficulty",                  null: false
-    t.integer  "fun_factor",                  null: false
-    t.integer  "size",                        null: false
+    t.integer  "difficulty",  default: 3,     null: false
+    t.integer  "fun_factor",  default: 3,     null: false
+    t.integer  "size",        default: 3,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "closed",      default: false, null: false
@@ -127,7 +153,7 @@ ActiveRecord::Schema.define(version: 20150322132054) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",         null: false
-    t.string   "encrypted_password",     default: "",         null: false
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -144,9 +170,20 @@ ActiveRecord::Schema.define(version: 20150322132054) do
     t.string   "last_name"
     t.string   "title"
     t.string   "role",                   default: "Employee", null: false
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "verifications", force: :cascade do |t|

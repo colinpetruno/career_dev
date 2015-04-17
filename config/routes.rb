@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     resources :settings, only: [:index]
     resources :subscriptions, only: [:update]
     resources :tasks do
-      resources :offers, only: [:create, :update]
+      resources :offers, only: [:create, :update], shallow: true do
+        resource :submission, shallow: true
+      end
     end
   end
 

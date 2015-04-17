@@ -12,9 +12,24 @@ class TaskMailer < MandrillMailer::TemplateMailer
         TASK_URL: task_url
       }
     )
+
+    create_email_record(task, user)
+  end
+
+  def task_accepted(task, user)
+
   end
 
   private
+
+  def create_email_record(task, user)
+    task.
+      email_records.
+      create(user_id: user.id,
+             mailer_class: "TaskMailer",
+             mailer_method: "task_notification",
+            )
+  end
 
   def routes
     Rails.application.routes.url_helpers

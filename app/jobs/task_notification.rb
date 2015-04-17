@@ -5,6 +5,7 @@ class TaskNotification
     task = Task.find(task_id)
     recipient = User.find(user_id)
 
+
     TaskMailer.task_notification(task, recipient).deliver
   end
 end

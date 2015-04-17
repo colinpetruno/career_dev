@@ -2,13 +2,13 @@ class TasksController < AuthenticatedController
   load_and_authorize_resource except: [:index, :show]
 
   def index
-    @tasks = current_company.
-      tasks.
-      with_category(params[:category] || nil).
-      includes(:category).
-      page(params[:page]).decorate
+    @tasks = TaskFinder.new(
+      user: current_user,
+      category: params[:category],
+      page: params[:page]
+    ).get_tasks
 
-    @categories = current_company.categories.includes(:tasks)
+    @categories = current_company.categories
 
     respond_to do |format|
       format.html

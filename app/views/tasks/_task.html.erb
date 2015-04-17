@@ -1,0 +1,32 @@
+<li class="task-row">
+  <section>
+    <div>
+      <div class="title">
+        <%= task.task_link %>
+      </div>
+      <div class="description">
+        <%= task.description %>
+      </div>
+    </div>
+    <div>
+      <%= task.points %>
+    </div>
+  </section>
+  <footer>
+    <div>
+      <%= task.category.name %>
+    </div>
+    <div>
+      Difficulty
+      <%= rating_for(task.difficulty) %>
+    </div>
+    <div>
+      Fun Factor
+      <%= rating_for(task.fun_factor) %>
+    </div>
+    <div>
+      Size
+      <%= rating_for(task.size) %>
+    </div>
+  </footer>
+</li>
