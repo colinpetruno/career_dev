@@ -16,6 +16,12 @@ class Offer < ActiveRecord::Base
     self
   end
 
+  def complete_with_submission(submission_params)
+    # TODO: Test me
+    self.completed = true
+    self.build_submission(submission_params)
+  end
+
   private
 
   def update_user_points
