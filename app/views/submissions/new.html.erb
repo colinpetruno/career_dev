@@ -1,6 +1,10 @@
 <section>
   <div>
     <h1>Submit Task</h1>
+
+    <b>Task Description</b><br>
+    <%= @offer.task.description %>
+    <br><br>
     <%= render partial: "form" %>
   </div>
 </section>

@@ -53,18 +53,14 @@
   <br><br>
 
   <div>
-    <div class="two-column-row">
-      <div>
-        <%= @task.next_step_button %>
-        <%= link_to 'Back',
-          company_tasks_path(current_user.company),
-          class: "btn btn-default"
-        %>
-      </div>
+    <% if current_user.is? :employee %>
+      <%= @task.next_step_button %>
+    <% end %>
+    <%= link_to 'Back',
+      company_tasks_path(current_user.company),
+      class: "btn btn-default"
+    %>
 
-      <div class="text-right">
-      </div>
-    </div>
   </div>
 
   <br><br>

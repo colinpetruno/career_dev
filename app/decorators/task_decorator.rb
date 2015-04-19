@@ -32,6 +32,10 @@ class TaskDecorator < Draper::Decorator
     end
   end
 
+  def completed_submissions
+    object.offers.approved.map{ |o| o.submission }
+  end
+
   private
 
   def can_complete_task?

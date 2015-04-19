@@ -19,7 +19,16 @@ class Task < ActiveRecord::Base
     foreign_key: "prerequisite_id"
   has_many :postrequistables, through: :postrequisites, source: :task
 
-  has_many :submissions, through: :offers
+  has_many :submissions, through: :offers do
+    def not_approved
+      # TODO: Test me
+      where("offers.approved = ?", false).decorate
+    end
+
+    def approved
+      where("offers.approved = ?", true).decorate
+    end
+  end
 
   after_create :create_notification_emails
 

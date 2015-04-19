@@ -1,1 +1,9 @@
-<%= link_to submission.user.full_name, submission_path(submission) %><br>
+<div class="two-column-row">
+  <div>
+    <%# TODO: Change this link to the user profile %>
+    <%= link_to submission.user.full_name, submission_path(submission) %>
+  </div>
+  <div class="text-right">
+    <%= submission.link %>
+  </div>
+</div>

@@ -4,7 +4,10 @@ class Offer < ActiveRecord::Base
 
   has_one :submission
 
-  scope :accepted, -> { where(accepted: true).where(approved: false) }
+  scope :accepted, -> { where(accepted: true).
+                        where(approved: false).
+                        where(completed: false)
+                      }
   scope :approved, -> { where(approved: true) }
   scope :completed, -> { where(completed: true) }
   scope :not_accepted, -> { where(accepted: false) }

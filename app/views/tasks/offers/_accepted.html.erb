@@ -1,9 +1,10 @@
 <div class="task-status">
   <h3>Congrats! <small>You have been selected for this task</small></h3>
-  <p class="text-info">When you are completed, click the button below to get it reviewed</p>
+  <p class="text-info">When you are finished, click the button below to get
+    it reviewed</p>
 
-  <%= form_for [@task, @task.offer_for(current_user)] do |f| %>
-    <%= f.hidden_field :completed, value: true %>
-    <%= f.submit "Completed", class: "btn btn-info" %>
-  <% end %>
+  <%= link_to "Submit My Work",
+    new_offer_submission_path(@task.offer_for(current_user)),
+    class: "button"
+  %>
 </div>

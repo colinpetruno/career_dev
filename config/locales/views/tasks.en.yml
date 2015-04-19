@@ -2,4 +2,4 @@ en:
   tasks:
     offers:
       expressed_interest:
-        message: "Thanks for expressing interest in this task"
+        message: "Thanks for expressing interest in this task. You will get an email when you have been selected to complete the task!"
