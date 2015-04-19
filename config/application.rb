@@ -26,7 +26,6 @@ module CareerDev
 
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
-
     config.active_record.dump_schema_after_migration = false
 
     config.action_mailer.default_url_options = { :host => 'www.example.com' }

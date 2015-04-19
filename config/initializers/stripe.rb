@@ -1,3 +1,3 @@
-Stripe.api_key = "sk_test_0LJz3fwwOFbunIMdqyYxkAM5"
-STRIPE_PUBLIC_KEY = "pk_test_kjSj9CCy52DNEN990wN3Foto"
+Stripe.api_key = ENV.fetch("STRIPE_API_KEY")
+STRIPE_PUBLIC_KEY = ENV.fetch("STRIPE_PUBLIC_KEY")
 # TODO: Move to config
