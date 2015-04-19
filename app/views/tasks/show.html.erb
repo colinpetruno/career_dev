@@ -14,12 +14,8 @@
     </div>
   </div>
 
-
-
   <div>
-    <div class="task-status">
-      <%= render partial: "/tasks/offers/#{@task.status}" if @task.status %>
-    </div>
+    <%= render partial: "/tasks/offers/#{@task.status}" if @task.status %>
   </div>
 
   <div class="right-rail">
@@ -74,7 +70,7 @@
   <br><br>
 
   <% if can? :manage, @task %>
-    <%= render partial: "manage_sidebar" %>
+    <%= render partial: "manage_task" %>
   <% end %>
 
 </section>

@@ -16,6 +16,10 @@ class SubmissionsController < AuthenticatedController
     end
   end
 
+  def show
+    @submission = Submission.find(params[:id])
+  end
+
   private
 
   def submission_params

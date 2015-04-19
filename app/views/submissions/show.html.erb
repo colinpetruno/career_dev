@@ -1,0 +1,19 @@
+<section>
+  <div>
+    <h3>Submission by <%= @submission.user.full_name %></h3>
+    <div>
+      <b>Task Title</b>
+      <%= @submission.task.title %>
+    </div>
+    <div>
+      <b>Task Description</b>
+      <%= @submission.task.description %>
+    </div>
+    <br><br>
+    <b>Content</b><br>
+    <%= @submission.feedback %>
+    <div>
+      <b>Attachments</b>
+    </div>
+  </div>
+</section>
