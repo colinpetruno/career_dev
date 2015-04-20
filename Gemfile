@@ -4,6 +4,7 @@ ruby "2.1.5"
 gem "rails", "~> 4.2.0"
 
 gem "activerecord-session_store"
+gem "airbrake"
 gem "bitters"
 gem "bourbon"
 gem "cancancan"
