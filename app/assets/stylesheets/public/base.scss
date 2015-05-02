@@ -1,3 +1,14 @@
 @import "welcome/base";
 @import "registrations/main";
 @import "partials/main";
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: $dark-gray;
+}
+
+#content-section {
+  background-color: $white;
+  min-height: 500px;
+}
