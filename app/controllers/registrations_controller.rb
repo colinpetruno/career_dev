@@ -1,6 +1,7 @@
 class RegistrationsController < ApplicationController
   respond_to :html
   before_filter :check_for_current_user
+  layout "public"
 
   def new
     # TODO: Improve this experience

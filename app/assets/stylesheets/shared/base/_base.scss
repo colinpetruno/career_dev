@@ -3,11 +3,11 @@
 // Copyright 2013-2015 thoughtbot, inc.
 // MIT License
 
+
+@import "bourbon";
+
 @import "variables";
-
-// Neat Settings -- uncomment if using Neat -- must be imported before Neat
 @import "grid-settings";
-
 @import "buttons";
 @import "forms";
 @import "lists";
@@ -15,6 +15,13 @@
 @import "typography";
 @import "layout";
 @import "flashes";
+
+/* Neat needs imported after bitters */
+@import "neat";
+@import "layouts/main";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 body {
   margin: 0px;
