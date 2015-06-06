@@ -16,16 +16,23 @@
     <link href='//fonts.googleapis.com/css?family=Sanchez:400italic,400' rel='stylesheet' type='text/css'>
 
     <%= render partial: "shared/analytics" %>
+
   </head>
   <body>
 
-    <div id="content-section">
-      <%# content_for?(:content) ? yield(:content) : yield %>
+    <div id="app-frame">
+      <%= render partial: "shared/app_header" %>
+
+      <div id="app-content">
+        <%= render partial: "shared/sidebar" %>
+        <div id="content-area">
+          <%= content_for?(:content) ? yield(:content) : yield %>
+        </div>
+      </div>
     </div>
 
-    <%# render partial: "shared/footer" %>
-
     <%= javascript_include_tag("application") %>
+    <%= cloudinary_js_config %>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <%= yield(:footer) if content_for?(:footer)%>
   </body>

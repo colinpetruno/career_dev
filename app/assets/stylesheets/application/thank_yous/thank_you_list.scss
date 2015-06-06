@@ -1,0 +1,9 @@
+.thank-you-list {
+  &>div {
+    @include outer-container;
+    ul li {
+      @include span-columns(6);
+      @include omega(2n);
+    }
+  }
+}

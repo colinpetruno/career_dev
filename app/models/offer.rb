@@ -14,6 +14,22 @@ class Offer < ActiveRecord::Base
 
   after_save :update_user_points
 
+  def self.for(task:, user:)
+    new(task: task, user: user )
+  end
+
+  def accepted?
+    self.accepted && !self.approved && !self.completed
+  end
+
+  def approved?
+    self.approved && self.accepted && self.completed
+  end
+
+  def completed?
+    self.completed && self.accepted && !self.approved
+  end
+
   def for_user(user)
     self.user_id = user.id
     self

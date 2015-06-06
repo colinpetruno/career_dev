@@ -1,23 +1,12 @@
 <h3>Employees</h3>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Points</th>
-  </tr>
 
-  <% @users.each do |user| %>
-    <tr>
-      <td>
-        <%= link_to "#{user.first_name} #{user.last_name}",
-          edit_company_user_path(current_user.company, user)
-        %>
-      </td>
-      <td><%= user.email %></td>
-      <td><%= user.points %></td>
-    </tr>
-  <% end %>
-</table>
+<section>
+  <div class="employee-list">
+    <ul>
+      <%= render @users %>
+    </ul>
+  </div>
+</section>
 
 <%= link_to "Invite Your Team Members",
   new_company_invitation_path(current_company),

@@ -1,0 +1,3 @@
+class ThankYou < Message
+
+end

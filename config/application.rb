@@ -38,5 +38,9 @@ module CareerDev
       authentication: 'login', # Mandrill supports 'plain' or 'login'
       enable_starttls_auto: true # detects and uses STARTTLS
     }
+
+    config.to_prepare do
+      Devise::SessionsController.layout "public"
+    end
   end
 end

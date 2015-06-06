@@ -11,6 +11,10 @@ FactoryGirl.define do
       role "Company Admin"
     end
 
+    trait :with_avatar do
+      avatar { FactoryGirl.build(:file) }
+    end
+
     factory :company_admin, traits: [:is_company_admin]
   end
 

@@ -4,12 +4,13 @@
   </div>
 
   <% if can? :create, Task %>
-    <h3>Get Started Creating Tasks</h3>
+    <h3>Be the first to ask for assistance!</h3>
     <div class="seperator"></div>
     <br>
-    <%= link_to "Create a Task", new_company_task_path(current_company), class: "button" %>
+    <%= link_to "Ask for Assistance", new_company_task_path(current_company), class: "button" %>
   <% else %>
-    <h3>Your company hasn't created any tasks yet! Check back soon</h3>
+    <h3>No one has asked for any assistance yet! We'll be sure to email you
+      when they do!</h3>
     <%# TODO: Create an email to company managers to add tasks %>
   <% end %>
 </div>

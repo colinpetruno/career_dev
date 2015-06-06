@@ -1,36 +1,13 @@
+<div class="section-header">
+  <h3>Ask for Assistance</h3>
+</div>
+
 <section>
-  <div class="contain">
-    <div class="two-column-row">
-      <div>
-    <h1>New task</h1>
-
+  <div>
     <%= render partial: "form" %>
-
-    <%= link_to 'Back', company_tasks_path(current_user.company) %>
-      </div>
-      <div>
-        <h3>Prerequisites</h3>
-
-        <table id="tasks-table">
-          <tr>
-            <th>Name</th>
-            <th>Created At</th>
-          </tr>
-          <% @tasks.each do |task| %>
-            <tr>
-              <td><%= task.title %></td>
-              <td><%= task.created_at %></td>
-            </tr>
-          <% end %>
-        </table>
-
-        <div id="task-table-pagination">
-          <%= paginate @tasks,
-            remote: true,
-            params: {controller: 'tasks', action: 'index'}
-          %>
-        </div>
-      </div>
-    </div>
   </div>
+</section>
+
+<div class="section-header">
+  <%= link_to 'Back', company_tasks_path(current_user.company) %>
 </div>

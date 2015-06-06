@@ -1,11 +1,22 @@
 class TaskDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :user
+  decorates_association :offers
+
   def task_link
     if can_complete_task?
-      h.link_to(task.title, h.company_task_path(h.current_user.company, task))
+      h.link_to(title_with_name, h.company_task_path(h.current_user.company, task))
     else
-      task.title
+      h.content_tag(:strong, list_title)
+    end
+  end
+
+  def title_with_name
+    if task.user == h.current_user
+      "#{user.display_name} need help with #{task.title}"
+    else
+      "#{user.display_name} needs help with #{task.title}"
     end
   end
 
@@ -34,6 +45,10 @@ class TaskDecorator < Draper::Decorator
 
   def completed_submissions
     object.offers.approved.map{ |o| o.submission }
+  end
+
+  def user_photo
+    user.photo
   end
 
   private

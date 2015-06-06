@@ -5,45 +5,20 @@
 }
 
 .task-row {
-  background-color: #eee;
+  background-color: #fff;
   margin-bottom: 10px;
   cursor: default;
 
-  section {
-    padding: 10px;
-    border-left: 1px solid #aaa;
-    border-right: 1px solid #aaa;
-    border-top: 1px solid #aaa;
-
+  &>div {
     @include outer-container;
-    &>div:first-child {
-      @include span-columns(11);
-    }
-    &>div:last-child {
-      text-align: center; 
-      font-size: $large-font-size;
+    div:first-child {
       @include span-columns(1);
-    }
-
-    .title {
-      font-size: $large-font-size; 
-    }
-
-    .description {
-
-    }
-  }
-
-  footer {
-    border: 1px solid #aaa;
-    @include outer-container;
-    >div {
-      padding: 10px;
-      @include span-columns(3);
-      i {
-        color: #f9cf34;
-        padding: 0 5px;
+      img {
+        border-radius: 50%;
       }
+    }
+    div:last-child {
+      @include span-columns(11);
     }
   }
 }

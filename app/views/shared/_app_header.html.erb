@@ -1,0 +1,21 @@
+<div id="sticky-header">
+  <div class="logo">
+    <div><%= image_tag "logos/logo.png" %></div> TREEHAUS
+  </div>
+
+  <div class="header-content">
+    <div class="profile-image">
+      <%= link_to current_user.photo,
+        edit_company_user_path(current_company, current_user)
+      %>
+    </div>
+
+    <div class="buttons">
+      <%= link_to icon("th"), company_tasks_path(current_company) %>
+      <%= link_to icon("envelope-o"), "#" %>
+      <%= link_to icon("gear"), "#" %>
+    </div>
+  </div>
+
+  <div style="clear: both"></div>
+</div>

@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     resource :billing_plan, path: "billing"
     resources :categories
     resources :credit_cards, only: [:new, :create]
-    resources :users, only: [:index, :edit, :update], path: "employees" do
+    resources :users, only: [:index, :edit, :show, :update], path: "employees" do
       resources :tasks, only: [:index], controller: 'users/tasks'
+      resources :thank_yous, shallow: true
     end
     resources :funding_instruments, only: [:index], path: "payment-methods"
     resources :invitations, only: [:new, :create], path: "invitations"
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  mount Attachinary::Engine => "/attachinary"
 
   # TODO: Restrict access for site admins
   ResqueWeb::Engine.eager_load!

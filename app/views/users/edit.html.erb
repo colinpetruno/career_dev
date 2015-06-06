@@ -1,18 +1,33 @@
-<%= form_for [@user.company, @user] do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
+<div class="section-header">
+  <h3><%= @user.full_name %></h3>
+</div>
 
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
+<section>
+  <%= form_for [@user.company, @user] do |f| %>
+    <div class="left-rail">
+      <div class="employee-profile-image">
+        <div id="edit-profile-image"></div>
+        <%= f.attachinary_file_field :avatar %>
+      </div>
+      <div>
+        <%= f.label(:first_name) %>
+        <%= @user.first_name_field(f) %>
 
-  <%= f.select(
-      :role,
-      User.
-        public_roles.
-        map {|role| [role.to_s.titleize, role]},
-      {},
-      disabled: @user.id.eql?(current_user.id)
-    )
-  %>
-  <%= f.submit %>
-<% end %>
+        <%= f.label :last_name %>
+        <%= @user.last_name_field(f) %>
+
+        <%= f.label :hometown %>
+        <%= f.text_field :hometown %>
+
+        <%= f.label :interests %>
+        <%= f.text_field :interests %>
+
+        <%= f.label :resides %>
+        <%= f.text_field :resides %>
+
+        <%= @user.role_select_field(f) %>
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+</section>

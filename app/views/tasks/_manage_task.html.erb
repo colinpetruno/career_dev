@@ -1,7 +1,7 @@
 <div class="four-column-row">
   <div>
     <h4>Interested</h4>
-    <% if @task.offers.not_accepted.present? %>
+    <% if @task.offers.present? %>
         <% @task.offers.not_accepted.each do |offer| %>
           <div class="two-column-row">
             <div>
@@ -24,8 +24,8 @@
 
   <div>
     <h4>In Progress</h4>
-    <% if @task.offers.accepted.present? %>
-        <% @task.offers.accepted.each do |offer| %>
+    <% if @task.offers.present? %>
+        <% @task.offers.each do |offer| %>
           <div class="two-column-row">
             <div>
               <%= offer.user.full_name %>
@@ -51,10 +51,6 @@
 
   <div>
     <h4>Approved</h4>
-    <%= render @task.submissions.approved %>
+    <% render @task.submissions.approved %>
   </div>
 </div>
-
-
-
-

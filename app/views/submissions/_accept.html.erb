@@ -1,0 +1,6 @@
+<div>
+  <%= form_for [submission.task, submission.offer] do |f| %>
+    <%= f.hidden_field :approved, value: true %>
+    <%= f.submit "Approve Work", class: "button" %>
+  <% end %>
+</div>

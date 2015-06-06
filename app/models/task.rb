@@ -22,11 +22,11 @@ class Task < ActiveRecord::Base
   has_many :submissions, through: :offers do
     def not_approved
       # TODO: Test me
-      where("offers.approved = ?", false).decorate
+      where("offers.approved = ?", false) # .decorate
     end
 
     def approved
-      where("offers.approved = ?", true).decorate
+      where("offers.approved = ?", true) # .decorate
     end
   end
 
@@ -67,8 +67,6 @@ class Task < ActiveRecord::Base
   def offer_for(user)
     offers.where(user_id: user.id).first
   end
-
-
 
   def points
     (((difficulty + size) * normalized_fun_factor) * 10).to_i

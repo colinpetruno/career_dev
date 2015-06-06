@@ -1,0 +1,8 @@
+<div class="profile">
+  <div class="photo">
+    <%= user.photo %>
+  </div>
+  <%= link_to user.full_name, company_user_path(current_company, user) %><br>
+  <%= user.title %>
+  Completed Tasks: <%= user.offers.approved.size %>
+</div>

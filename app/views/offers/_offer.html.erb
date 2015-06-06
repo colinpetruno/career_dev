@@ -1,0 +1,12 @@
+<% return unless offer.persisted? %>
+
+<li class="offer">
+  <div class="left-rail">
+    <div>
+      <%= offer.user_photo %>
+    </div>
+    <div>
+      <%= offer.content %><br>
+    </div>
+  </div>
+</li>

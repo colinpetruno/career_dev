@@ -1,73 +1,55 @@
-<section>
-  <div>
-    <div class="two-column-row">
-      <div>
-        <h3><%= @task.title %></h3>
-      </div>
-      <div class="text-right">
-        <% if can? :manage, @task %>
-          <%= link_to "Edit Task",
-            edit_company_task_path(current_user.company, @task),
-            class: "button" %>
-        <% end %>
-      </div>
+<div class="section-header">
+  <div class="two-column-row">
+    <div>
+      <h3><%= @task.title_with_name %></h3>
+    </div>
+    <div class="text-right">
+      <% if can? :update, @task %>
+        <%= link_to "Edit Task",
+          edit_company_task_path(current_user.company, @task),
+          class: "button" %>
+      <% end %>
     </div>
   </div>
+</div>
 
+
+<section>
   <div>
     <%= render partial: "/tasks/offers/#{@task.status}" if @task.status %>
   </div>
 
-  <div class="right-rail">
+  <div class="left-rail">
+    <div>
+      <%= render partial: "users/profile", locals: { user: @task.user } %>
+    </div>
     <div>
       <%= @task.description %>
     </div>
-
-    <div class="task-info">
-      <div>
-        <%= @task.points %><br>
-        Pts
-      </div>
-      <div>
-        <b>Difficulty:</b><br>
-        <%= rating_for(@task.difficulty) %>
-      </div>
-
-      <div>
-        <b>Fun factor:</b><br>
-        <%= rating_for(@task.fun_factor) %>
-      </div>
-
-      <div>
-        <b>Size:</b><br>
-        <%= rating_for(@task.size) %>
-      </div>
-
-      <div>
-        <b>Category:</b><br>
-        <%= @task.category.name %>
-      </div>
-    </div>
   </div>
-
-  <br><br>
-
-  <div>
-    <% if current_user.is? :employee %>
-      <%= @task.next_step_button %>
-    <% end %>
-    <%= link_to 'Back',
-      company_tasks_path(current_user.company),
-      class: "btn btn-default"
-    %>
-
-  </div>
-
-  <br><br>
-
-  <% if can? :manage, @task %>
-    <%= render partial: "manage_task" %>
-  <% end %>
-
 </section>
 
+<div class="section-header">
+  <h3>Offers to Help</h3>
+</div>
+
+<section>
+  <div class="offer-list">
+    <ul>
+      <% if @task.user != current_user && @task.offer_for(current_user).blank?  %>
+        <%= simple_form_for [current_company, @task, @offer] do |f| %>
+          <%= f.submit value: "I want to help!" %>
+        <% end %>
+      <% end %>
+
+      <%= render partial: "offers/offer", collection: @task.offers %>
+    </ul>
+  </div>
+</section>
+
+<div class="section-header">
+  <%= link_to 'Back',
+    company_tasks_path(current_user.company),
+    class: "btn btn-default"
+  %>
+</div>

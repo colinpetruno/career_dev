@@ -1,0 +1,9 @@
+<%=
+  "#{offer.user.full_name} Offered to Help on
+  #{l(offer.created_at, format: :short)}"
+%>
+
+<%= form_for [offer.task, offer] do |f| %>
+  <%= f.hidden_field :accepted, value: true %>
+  <%= f.submit "Accept", class: "btn btn-success" %>
+<% end %>

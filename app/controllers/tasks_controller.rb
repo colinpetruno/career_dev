@@ -8,6 +8,7 @@ class TasksController < AuthenticatedController
       page: params[:page]
     ).get_tasks
 
+
     @categories = current_company.categories
 
     respond_to do |format|
@@ -18,8 +19,8 @@ class TasksController < AuthenticatedController
   end
 
   def show
-
     @task = current_company.tasks.find(params[:id]).decorate
+    @offer = Offer.for(task: @task, user: current_user)
 
     if can?(:manage, Task) || @task.completable_for?(current_user)
       respond_to do |format|

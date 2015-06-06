@@ -1,0 +1,70 @@
+#sticky-header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+
+  .header-content {
+    height: 75px;
+    display: inline-block;  
+    text-align: right;
+    float: right;
+
+    .profile-image {
+      height: 75px;
+      padding: 10px;
+      img {
+        border-radius: 50%;
+        max-width: 50px;
+      }
+    }
+
+    div {
+      float: right; 
+      line-height: 75px;
+      height: 75px;
+      min-height: 75px;
+    }
+
+    .buttons {
+      height: 75px;
+      min-width: 200px;
+      margin-right: 5px;
+      background-color: #f8f8f8;
+      a {
+        display: inline-block;
+        height: 75px;
+        color: #777;
+        font-size: 24px;
+        padding: 0 20px;
+        line-height: 75px;
+        &:hover {
+          color: #b7d02e;
+        }
+      }
+    }
+  }
+
+  .logo {
+    background-color: #b7d02e;
+    float: left;
+    line-height: 75px;
+    min-height: 75px;
+    height: 75px;
+    width: 225px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 24px;
+    vertical-align: middle;
+
+    div {
+      line-height: 50px;
+      padding-top: 12px;
+      padding-left: 15px;
+      padding-right: 5px;
+      vertical-align: top;
+      display: inline-block;
+      img {
+        max-width: 50px;
+      }
+    }
+  }
+}

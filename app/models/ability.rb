@@ -13,7 +13,10 @@ class Ability
       can :manage, BankAccount, company_id: user.company_id
       can :manage, CreditCard, company_id: user.company_id
     else user.is? :employee
-      can :manage, Submission, user_id: user.id, company_id: user.company_id
+      can :create, Task
+      can :update, Task, user_id: user.id
+      can :manage, Submission, company_id: user.company_id, user_id: user.id
+      can :manage, User, company_id: user.company_id, id: user.id
     end
   end
 end

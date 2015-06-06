@@ -7,7 +7,8 @@ class TaskFinder
   end
 
   def get_tasks
-    tasks.where.not(id: user_task_ids).page(page).decorate
+    #tasks.where.not(id: user_task_ids).page(page).decorate
+    tasks.page(page).decorate
   end
 
   private

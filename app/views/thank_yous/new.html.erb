@@ -1,0 +1,11 @@
+<div class="section-header">
+  <h3>Thank <%= @user.full_name %></h3>
+</div>
+
+<section>
+  <%= simple_form_for [current_company, @user, @thank_you] do |f| %>
+    <%= f.input :message, label: "Thank You For..." %>
+    <%= f.input :private %>
+    <%= f.button :submit %>
+  <% end %>
+</section>

@@ -1,0 +1,23 @@
+.employee-list {
+  padding: 0 20px;
+
+  li {
+    @include span-columns(2);
+    @include omega(6n);
+
+    text-align: center;
+
+    img {
+      border-radius: 50%;
+      max-width: 100%;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .title {
+      font-style: italic;
+    }
+  }
+}

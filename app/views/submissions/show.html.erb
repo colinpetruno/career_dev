@@ -1,6 +1,9 @@
+<div class="section-header">
+  <h3>Submission by <%= @submission.user.full_name %></h3>
+</div>
+
 <section>
   <div>
-    <h3>Submission by <%= @submission.user.full_name %></h3>
     <div>
       <b>Task Title</b>
       <%= @submission.task.title %>
@@ -15,16 +18,12 @@
     <div>
       <b>Attachments</b>
     </div>
-    <div>
-      <% if !@submission.approved? %>
-        <%= form_for [@submission.task, @submission.offer] do |f| %>
-          <%= f.hidden_field :approved, value: true %>
-          <%= f.submit "Approve Work", class: "button" %>
-        <% end %>
-      <% end %>
-      <%= link_to "Back",
-        company_task_path(current_company, @submission.task)
-      %>
-    </div>
+
+    <%= @submission.accept_form %>
   </div>
 </section>
+
+<div class="section-header">
+  <%= link_to "Back",
+    company_task_path(current_company, @submission.task) %>
+</div>

@@ -1,0 +1,9 @@
+<li>
+  <%= link_to(company_user_path(current_company, user)) do %>
+    <%= user.photo %>
+    <div>
+      <span class="name"><%= user.full_name %></span><br>
+      <span class="title">Software Developer</span>
+    </div>
+  <% end %>
+</li>

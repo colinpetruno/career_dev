@@ -1,32 +1,20 @@
-<section>
-  <div>
-    <div class="two-column-row">
-      <div>
-        <h1>Tasks</h1>
-      </div>
-      <div class="text-right">
-        <% if can? :create, Task %>
-          <%= link_to "New Task", new_company_task_path(current_company), class: "button" %>
-        <% end %>
-      </div>
+<div class="section-header">
+  <div class="two-column-row">
+    <div>
+      <h3>Your Coworkers need help!</h3>
     </div>
-    <div class="category-select">
-      <div>
-        <%=
-          select_tag(
-            :category_select,
-            options_from_collection_for_select(
-              current_company.categories, :id, :name, params[:category]
-            ),
-            include_blank: true
-          )
-        %>
-      </div>
+    <div class="text-right">
+      <% if can? :create, Task %>
+        <%= link_to "Ask for Assistance", new_company_task_path(current_company), class: "button" %>
+      <% end %>
     </div>
-    <% if @tasks.present? %>
-      <%= render partial: "tasks" %>
-    <% else %>
-      <%= render partial: "no_tasks_present" %>
-    <% end %>
   </div>
+</div>
+
+<section>
+  <% if @tasks.present? %>
+    <%= render partial: "tasks" %>
+  <% else %>
+    <%= render partial: "no_tasks_present" %>
+  <% end %>
 </section>

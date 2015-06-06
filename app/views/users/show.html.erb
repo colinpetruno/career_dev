@@ -1,0 +1,50 @@
+<div class="section-header">
+  <h3><%= @user.full_name %></h3>
+</div>
+
+<section>
+  <div class="left-rail">
+    <div class="employee-profile-image">
+      <%= @user.photo %><br>
+      Software Developer
+      <% if can? :manage, @user %>
+        <%= link_to(
+          "Edit Profile",
+          edit_company_user_path(current_company, @user),
+          class: "button"
+        )%>
+      <% end %>
+
+      <%= link_to(
+        "Thank",
+        new_company_user_thank_you_path(current_company, @user),
+        class: "button")
+      %>
+
+    </div>
+    <div>
+      <h3><%= @user.full_name %></h3>
+      Resides: <%= @user.resides %><br>
+      Hometown: <%= @user.hometown %><br>
+      Employee Since: <%= @user.start_date %><br>
+      Interests: <%= @user.interests %>
+    </div>
+  </div>
+</section>
+
+<div class="section-header">
+  <h3>Thank Yous</h3>
+</div>
+
+<section class="thank-you-list">
+  <div>
+    <ul>
+      <%= render partial: "thank_yous/thank_you",
+        collection: @user.recent_thank_yous %>
+    </ul>
+  </div>
+</section>
+
+<div class="section-header">
+  <%= link_to "Back", company_users_path(current_company) %>
+</div>

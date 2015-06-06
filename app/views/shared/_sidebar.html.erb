@@ -1,0 +1,46 @@
+<div id="sidebar">
+  <ul>
+    <li class="divider">Main</li>
+    <li>
+      <%= link_to company_tasks_path(current_company) do %>
+        <%= icon("tasks") %> All Tasks
+      <% end %>
+    </li>
+    <li>
+      <%= link_to company_user_tasks_path(current_company, current_user) do %>
+        <span class="fa-stack">
+          <%= icon("tasks", "", class: "fa-stack-2x") %>
+          <%= icon("user", "", class: "fa-stack-1x") %>
+        </span>
+        Your Tasks
+      <% end %>
+    </li>
+    <li class="divider">Company Settings</li>
+
+    <li class="active">
+      <%= link_to edit_company_path(current_company) do %>
+        <%= icon("gears") %> Settings
+      <% end %>
+    </li>
+    <li>
+      <%= link_to company_categories_path(current_company) do %>
+        <%= icon("list-ul") %> Categories
+      <% end %>
+    </li>
+    <li>
+      <%= link_to company_users_path(current_company) do %>
+        <%= icon("users") %> Employees
+      <% end %>
+    </li>
+    <li>
+      <%= link_to company_billing_plan_path(current_company) do %>
+        <%= icon("file-text-o") %> Billing Plan
+      <% end %>
+    </li>
+    <li>
+      <%= link_to company_funding_instruments_path(current_company) do %>
+        <%= icon("credit-card") %> Payment Method
+      <% end %>
+    </li>
+  </ul>
+</div>

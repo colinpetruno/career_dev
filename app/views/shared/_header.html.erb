@@ -1,7 +1,7 @@
 <header class="navigation" role="banner">
   <div class="navigation-wrapper">
     <% if user_signed_in? %>
-      <%= link_to( image_tag("logos/logo.png"),
+      <%= link_to( current_user.photo,
                   company_tasks_path(current_user.company),
                   class: "logo")
       %>

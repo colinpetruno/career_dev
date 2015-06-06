@@ -5,8 +5,18 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # this is a bit weird to put view options here but the gem reads the config
+  # from the option hash passed in here. It could maybe? be read from the data
+  # params on the input but after a few tries I could not get that to work
+  has_attachment :avatar, {
+    accept: [:jpg, :png, :gif],
+    files_container_selector: "#edit-profile-image"
+  }
+
   has_many :offers
   has_many :tasks, through: :offers
+  has_many :thank_yous, foreign_key: "recipient_id"
+  has_many :sent_thank_yous, foreign_key: "sender_id", class_name: "ThankYou"
   belongs_to :company
 
 
@@ -49,8 +59,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def full_name
-    "#{self.first_name} #{self.last_name}"
+  def can_accept?(model)
+    model.user_id != id
   end
 
   private
