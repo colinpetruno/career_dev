@@ -40,6 +40,6 @@ class Admin::TasksController < ApplicationController
   def task_params
     params.
       require(:task).
-      permit(:category, :description, :difficulty, :fun_factor, :size, :title, :company_id, :user_id)
+      permit(:category, :description, :title, :company_id, :user_id)
   end
 end

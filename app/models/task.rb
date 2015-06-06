@@ -1,8 +1,6 @@
 class Task < ActiveRecord::Base
   paginates_per 15
 
-  DIFFICULTY = [1,2,3,4,5]
-
   belongs_to :category
   belongs_to :company
   belongs_to :user
@@ -68,10 +66,6 @@ class Task < ActiveRecord::Base
     offers.where(user_id: user.id).first
   end
 
-  def points
-    (((difficulty + size) * normalized_fun_factor) * 10).to_i
-  end
-
   def completable_for?(user)
     # TODO: TEST ME
     self.prerequisites.blank? || completed_prerequisites?(user)
@@ -85,15 +79,5 @@ class Task < ActiveRecord::Base
 
   def create_notification_emails
     Resque.enqueue(TaskNotifier, self.id)
-  end
-
-  def inverse_fun_factor
-    DIFFICULTY.reverse[fun_factor - 1]
-  end
-
-  def normalized_fun_factor
-    old_range = (DIFFICULTY.last - DIFFICULTY.first).to_f
-    new_range = 1.to_f
-    (((inverse_fun_factor.to_f - DIFFICULTY.first.to_f) * new_range) / old_range) + 1
   end
 end

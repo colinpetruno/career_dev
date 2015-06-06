@@ -47,31 +47,29 @@ class TasksController < AuthenticatedController
     end
   end
 
-  # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to company_task_path(current_user.company, @task), notice: 'Task was successfully created.'
+      redirect_to company_task_path(current_user.company, @task),
+        notice: 'Task was successfully created.'
     else
       render action: "new"
     end
   end
 
-  # PUT /tasks/1
-  # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
 
     respond_to do |format|
       if @task.update_attributes(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html do
+          redirect_to @task, notice: "Task was successfully updated."
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -83,11 +81,13 @@ class TasksController < AuthenticatedController
   private
 
   def task_params
-    # "task"=>{"title"=>"Engineering task 4", "description"=>"Test Prerequisites", "difficulty"=>"3", "fun_factor"=>"3", "size"=>"3", "category_id"=>"86", "prerequisite_ids"=>["", "112"]},
+    # "task"=>{"title"=>"Engineering task 4",
+    # "description"=>"Test Prerequisites",
+    # "category_id"=>"86", "prerequisite_ids"=>["", "112"]},
     params.
       require(:task).
-      permit(:category_id, :description, :difficulty, :fun_factor,
-             :size, :title, :company_id, :user_id, :prerequisite_ids => []).
+      permit(:category_id, :description, :title, :company_id,
+             :user_id, :prerequisite_ids => []).
       merge(user_id: current_user.id, company_id: current_user.company_id)
   end
 

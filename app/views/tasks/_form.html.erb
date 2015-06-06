@@ -21,30 +21,11 @@
       <div class="field">
         <%= f.input :description, label: "Additional Details" %>
       </div>
-      <div class="field">
-        <%= f.input :difficulty, collection: (1..5), selected: 3  %>
-      </div>
-      <div class="field">
-        <%= f.input :fun_factor, collection: (1..5), selected: 3 %>
-      </div>
-      <div class="field">
-        <%= f.input :size, collection: (1..5), selected: 3 %>
-      </div>
+
       <div class="field">
         <%= f.input :category_id,
           collection: current_company.categories %>
       </div>
-    </div>
-    <div>
-      <% if 1==2 %>
-        <% if (tasks = Task.for(current_user)).present? %>
-          <div class="field">
-            <%= f.association :prerequisites,
-              collection: tasks,
-              as: :check_boxes %>
-          </div>
-        <% end %>
-      <% end %>
     </div>
   </div>
 

@@ -9,19 +9,6 @@
         <br>
         <p><%= @task.description %></p>
 
-
-        <p><strong>Fun Factor</strong></p>
-        <p><%= @task.fun_factor %></p>
-
-        <p><strong>Difficulty</strong></p>
-        <p><%= @task.difficulty %></p>
-
-        <p><strong>Size</strong></p>
-        <p><%= @task.size %></p>
-
-        <p><strong>Points</strong></p>
-        <p><%= @task.points %></p>
-
         <%=
           link_to "Edit",
             edit_admin_task_path(@task),

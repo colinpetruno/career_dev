@@ -1,1 +1,4 @@
-<%= offer.user.full_name %> completed this task.
+<%= offer.user.full_name %> completed this task.<br>
+<% if offer.task.user_id == current_user.id %>
+  <%= link_to "View Submission", submission_path(offer.submission) %>
+<% end %>
